@@ -3,14 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-  <title>NezukoMusic · compact dashboard</title>
-  <!-- Font Awesome 6 (all icons, zero emoji) -->
+  <title>NEZUKOMUSIC · RED GLASS</title>
+  <!-- Font Awesome 6 (pure icons, zero emoji) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Telegram webapp (optional) -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    /* ---------- PHONE-FIRST · COMPACT · OFFICIAL VIBE ---------- */
+    /* ---------- RED · BLACK · WHITE · GLASSMORPHISM ---------- */
+    /* PHONE FIRST · COMPACT · OFFICIAL VIBE · BLOOD & LIGHT */
+    
     * {
       margin: 0;
       padding: 0;
@@ -18,36 +20,50 @@
     }
 
     body {
-      background: #0b0e14;  /* deep official dark */
-      background: radial-gradient(circle at 20% 10%, #131a24, #080b10);
+      background: #0b0303;  /* blackest black with red soul */
+      background: radial-gradient(circle at 20% 30%, #1f0c0c, #050101);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #eef4ff;
-      padding: 1.2rem 1rem;  /* phone-optimized padding */
+      color: #fff5f5;
+      padding: 1.2rem 1rem;
       line-height: 1.5;
       min-height: 100vh;
+      position: relative;
     }
 
-    /* subtle grid bg — official feel */
+    /* ---- RED GLASS OVERLAY (morph) ---- */
     body::before {
       content: "";
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
+      background: 
+        radial-gradient(circle at 80% 10%, rgba(200, 40, 40, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, rgba(190, 30, 30, 0.08) 0%, transparent 50%),
+        repeating-linear-gradient(45deg, rgba(255, 70, 70, 0.02) 0px, rgba(255, 70, 70, 0.02) 2px, transparent 2px, transparent 8px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* subtle grid – black/white/red tension */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
       background-image: 
-        linear-gradient(rgba(75, 130, 200, 0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(75, 130, 200, 0.02) 1px, transparent 1px);
-      background-size: 30px 30px;
+        linear-gradient(rgba(255, 80, 80, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 80, 80, 0.04) 1px, transparent 1px);
+      background-size: 28px 28px;
       pointer-events: none;
       z-index: 0;
     }
 
     .container {
-      max-width: 680px;  /* perfect for mobile, no huge cards */
+      max-width: 680px;
       margin: 0 auto;
       position: relative;
-      z-index: 5;
+      z-index: 10;
     }
 
-    /* ----- HEADER – SMALL, DENSE, OFFICIAL ----- */
+    /* ----- GLASS HEADER – RED / BLACK / WHITE ----- */
     .hero {
       display: flex;
       flex-direction: column;
@@ -56,42 +72,45 @@
     }
 
     .brand-icon {
-      font-size: 2.6rem;
-      background: linear-gradient(145deg, #1f2c38, #121a22);
-      width: 70px;
-      height: 70px;
+      font-size: 2.8rem;
+      background: rgba(30, 10, 10, 0.45);
+      backdrop-filter: blur(12px);
+      width: 80px;
+      height: 80px;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-      color: #c7aaff;
-      box-shadow: 0 12px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(140, 190, 255, 0.1);
-      margin-bottom: 0.5rem;
+      border-radius: 30% 70% 70% 30% / 50% 50% 50% 50%;
+      color: #ffb8b8;
+      border: 1.5px solid rgba(255, 80, 80, 0.5);
+      box-shadow: 0 15px 35px rgba(180, 20, 20, 0.25), 0 0 0 1px rgba(255, 120, 120, 0.15);
+      margin-bottom: 0.7rem;
+      text-shadow: 0 0 12px #ff3b3b;
     }
 
     .brand-icon i {
-      filter: drop-shadow(0 0 8px #6d4fcc);
+      filter: drop-shadow(0 0 12px #ff4f4f);
     }
 
     h1 {
-      font-size: 2.1rem;
+      font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      background: linear-gradient(to right, #f3ecff, #cce0ff);
+      background: linear-gradient(to right, #fff9f9, #ffc2c2, #ff8a8a);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 0.2rem;
-      text-shadow: 0 0 10px #234a7c;
+      text-shadow: 0 0 18px #ff3b3b80;
     }
 
     .bot-tagline {
-      font-size: 0.8rem;
-      background: #0e1a24cc;
-      backdrop-filter: blur(6px);
-      padding: 0.4rem 1.2rem;
-      border-radius: 40px;
-      border: 0.5px solid #3c6380;
-      color: #cfe0ff;
+      font-size: 0.78rem;
+      background: rgba(30, 10, 10, 0.5);
+      backdrop-filter: blur(16px);
+      padding: 0.45rem 1.4rem;
+      border-radius: 50px;
+      border: 0.6px solid rgba(255, 100, 100, 0.6);
+      color: #ffeaea;
       display: inline-flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -100,69 +119,71 @@
     }
 
     .tag-icon {
-      color: #93c0ff;
-      margin-right: 0.2rem;
+      color: #ffa0a0;
     }
 
-    /* ----- CARDS — CHHOTE, COMPACT, PHONE MAST ----- */
+    /* ========== GLASS CARDS — RED/BLACK/WHITE, MORPH, COMPACT ========= */
     .module-grid {
       display: flex;
       flex-direction: column;
-      gap: 1rem;  /* tight gap */
+      gap: 1.1rem;
     }
 
     .card {
-      background: rgba(16, 22, 30, 0.85);
-      backdrop-filter: blur(10px);
-      border: 0.5px solid #2d445b;
-      border-radius: 26px;   /* slightly rounded, official */
-      padding: 1.2rem 1.1rem;
-      box-shadow: 0 12px 30px -10px black;
-      transition: 0.1s ease;
+      background: rgba(20, 8, 8, 0.55);   /* deep black-red glass */
+      backdrop-filter: blur(18px) saturate(180%);
+      -webkit-backdrop-filter: blur(18px) saturate(180%);
+      border: 0.8px solid rgba(255, 90, 90, 0.4);
+      border-radius: 32px;
+      padding: 1.2rem 1.2rem;
+      box-shadow: 0 20px 40px -12px rgba(150, 0, 0, 0.3), inset 0 0 0 0.5px rgba(255, 200, 200, 0.15);
+      transition: all 0.2s ease;
     }
 
     .card:active {
-      background: rgba(26, 35, 46, 0.9);
-      border-color: #608bbf;
+      background: rgba(40, 12, 12, 0.7);
+      border-color: rgba(255, 80, 80, 0.8);
     }
 
-    /* card header — small */
+    /* card header — red accents */
     .card-header {
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      border-bottom: 1px solid #2f4a60;
-      padding-bottom: 0.65rem;
+      border-bottom: 1px solid rgba(255, 120, 120, 0.4);
+      padding-bottom: 0.7rem;
       margin-bottom: 0.9rem;
     }
 
     .card-header i {
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       width: 1.8rem;
-      color: #b38cff;
+      color: #ffaeae;  /* soft red-white */
+      text-shadow: 0 0 8px #ff5e5e;
     }
 
     .card-header h2 {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      color: #ecf3ff;
+      color: #ffe4e4;
       letter-spacing: -0.01em;
     }
 
     .badge {
-      background: #17384b;
+      background: rgba(150, 30, 30, 0.5);
+      backdrop-filter: blur(4px);
       border-radius: 40px;
-      padding: 0.15rem 0.7rem;
+      padding: 0.15rem 0.8rem;
       font-size: 0.6rem;
       font-weight: 700;
-      color: #ddeeff;
-      border: 0.5px solid #5585a8;
+      color: #ffd9d9;
+      border: 0.6px solid rgba(255, 110, 110, 0.8);
       margin-left: 0.2rem;
       text-transform: uppercase;
       white-space: nowrap;
     }
 
-    /* command items — chhota text, icons sharp */
+    /* ----- command items – white/red, glassy ----- */
     .cmd-list {
       display: flex;
       flex-direction: column;
@@ -173,73 +194,78 @@
       display: flex;
       align-items: baseline;
       gap: 0.4rem;
-      font-size: 0.82rem;   /* small, readable */
+      font-size: 0.82rem;
       padding: 0.2rem 0;
-      border-bottom: 1px dashed #2a4050;
+      border-bottom: 1px dashed rgba(255, 120, 120, 0.3);
     }
 
     .cmd-icon {
       min-width: 1.4rem;
       font-size: 0.9rem;
-      color: #aad0ff;
+      color: #ffb4b4; /* soft red */
       text-align: center;
     }
 
     .cmd-name {
-      background: #15232e;
-      padding: 0.15rem 0.7rem;
-      border-radius: 20px;
+      background: rgba(60, 20, 20, 0.6);
+      backdrop-filter: blur(4px);
+      padding: 0.15rem 0.8rem;
+      border-radius: 30px;
       font-family: 'SF Mono', 'Fira Code', monospace;
       font-weight: 600;
-      color: #e0edff;
-      border: 0.5px solid #3e6480;
-      font-size: 0.77rem;
+      color: #ffefef;
+      border: 0.6px solid rgba(255, 130, 130, 0.6);
+      font-size: 0.76rem;
       white-space: nowrap;
     }
 
     .cmd-desc {
-      color: #c5d6e8;
+      color: #f0dada;
       font-weight: 400;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       line-height: 1.3;
     }
 
     .channel-hint, .note {
       margin-top: 0.8rem;
-      padding: 0.4rem 0.9rem;
-      background: #0e1f2c;
-      border-left: 4px solid #5d9bcf;
-      border-radius: 16px;
-      color: #d4e6ff;
-      font-size: 0.76rem;
+      padding: 0.45rem 1rem;
+      background: rgba(70, 20, 20, 0.4);
+      backdrop-filter: blur(12px);
+      border-left: 5px solid #ff6a6a;
+      border-radius: 20px;
+      color: #ffe5e5;
+      font-size: 0.75rem;
       display: flex;
       gap: 0.5rem;
       align-items: center;
+      border: 0.5px solid rgba(255, 120, 120, 0.5);
     }
 
     .channel-hint i, .note i {
-      color: #7ab7ff;
+      color: #ffa2a2;
       font-size: 0.9rem;
     }
 
     .channel-hint {
-      background: #102433;
-      border-left-color: #8fbbee;
+      background: rgba(60, 20, 20, 0.4);
+      border-left-color: #ff8888;
     }
 
-    /* feature strip — compact */
+    /* feature strip — red glass */
     .feature-strip {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      background: #0d1c28;
-      margin: 1.4rem 0 1rem;
-      padding: 0.7rem 1.2rem;
-      border-radius: 40px;
-      border: 0.5px solid #3b6682;
-      font-size: 0.75rem;
+      background: rgba(30, 10, 10, 0.5);
+      backdrop-filter: blur(20px);
+      margin: 1.5rem 0 1rem;
+      padding: 0.7rem 1.3rem;
+      border-radius: 60px;
+      border: 0.8px solid rgba(255, 110, 110, 0.6);
+      font-size: 0.74rem;
       gap: 0.5rem;
+      color: #ffdbdb;
     }
 
     .feature-strip span {
@@ -248,7 +274,11 @@
       gap: 0.3rem;
     }
 
-    /* buttons — small, finger friendly */
+    .feature-strip i {
+      color: #ff9f9f;
+    }
+
+    /* ----- buttons – black/red/white, glass ----- */
     .button-panel {
       display: flex;
       flex-wrap: wrap;
@@ -258,65 +288,83 @@
     }
 
     .btn {
-      background: #1f3140;
-      border: 0.5px solid #486f8c;
-      border-radius: 50px;
-      padding: 0.55rem 1.3rem;
+      background: rgba(25, 10, 10, 0.55);
+      backdrop-filter: blur(16px);
+      border: 0.8px solid rgba(255, 100, 100, 0.7);
+      border-radius: 60px;
+      padding: 0.55rem 1.4rem;
       color: white;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
       font-size: 0.8rem;
-      backdrop-filter: blur(4px);
+      box-shadow: 0 6px 14px rgba(120, 0, 0, 0.2);
     }
 
     .btn i {
-      color: #b9dbff;
-      font-size: 0.85rem;
+      color: #ffc0c0;
     }
 
     .btn-primary {
-      background: linear-gradient(145deg, #36327a, #1f4a6e);
-      border-color: #8aa3e8;
+      background: rgba(180, 40, 40, 0.75);
+      backdrop-filter: blur(16px);
+      border-color: #ff8a8a;
+      color: white;
+      text-shadow: 0 0 6px white;
     }
 
     .btn-primary i {
       color: white;
     }
 
+    .btn:active {
+      background: rgba(200, 60, 60, 0.8);
+      border-color: #ffc0c0;
+    }
+
     hr {
       border: none;
-      height: 0.5px;
-      background: linear-gradient(90deg, transparent, #3e6f8f, transparent);
+      height: 0.8px;
+      background: linear-gradient(90deg, transparent, rgba(255, 100, 100, 0.7), transparent);
       margin: 1.5rem 0;
     }
 
     .footer {
       text-align: center;
-      color: #99b5cf;
-      font-size: 0.73rem;
+      color: #ffcaca;
+      font-size: 0.72rem;
     }
 
     .footer a {
-      color: #c0d6fa;
+      color: #ffc2c2;
       text-decoration: none;
-      border-bottom: 0.5px dotted #5d86a3;
+      border-bottom: 0.5px dotted rgba(255, 160, 160, 0.7);
     }
 
-    /* responsive touch */
     @media (max-width: 400px) {
       .cmd-name { white-space: normal; word-break: break-word; }
-      .card { padding: 1rem; }
     }
 
-    /* All emoji removed — 100% FontAwesome icons */
+    /* ---- RED GLASS SCROLLBAR ---- */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1a0808;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #a04040;
+      border-radius: 10px;
+    }
+
+    /* all emojis banned — only font awesome icons */
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- ===== HEADER – OFFICIAL, COMPACT ===== -->
+    <!-- ===== RED GLASS HERO ===== -->
     <div class="hero">
       <div class="brand-icon">
         <i class="fas fa-headphones-simple"></i>
@@ -324,17 +372,17 @@
       <h1>NezukoMusic</h1>
       <div class="bot-tagline">
         <i class="fas fa-microchip tag-icon"></i> voice+video
-        <i class="fas fa-circle" style="font-size: 0.3rem; color: #5f95c5;"></i>
+        <i class="fas fa-circle" style="font-size: 0.3rem; color: #ff8a8a;"></i>
         <i class="fas fa-shield-hal tag-icon"></i> admin suite
-        <i class="fas fa-circle" style="font-size: 0.3rem; color: #5f95c5;"></i>
+        <i class="fas fa-circle" style="font-size: 0.3rem; color: #ff8a8a;"></i>
         <i class="fas fa-sliders-h tag-icon"></i> 12 modules
       </div>
     </div>
 
-    <!-- ===== ALL MODULES – CARDS CHHOTE, TEXT CHHOTA, ICONS ONLY ===== -->
+    <!-- ========== ALL MODULES – RED/BLACK GLASS, COMPACT, ICONS ========= -->
     <div class="module-grid">
 
-      <!-- ██ ADMIN MODULE – ICONS EVERYWHERE, NO EMOJI ██ -->
+      <!-- ███ ADMIN MODULE — blood glass ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-shield-hooded"></i>
@@ -355,7 +403,7 @@
         <div class="channel-hint"><i class="fas fa-broadcast-tower"></i> add 'c' for channel: /cpause, /cskip ...</div>
       </div>
 
-      <!-- ██ AUTH MODULE ██ -->
+      <!-- ███ AUTH MODULE ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-user-check"></i>
@@ -370,19 +418,19 @@
         <div class="note"><i class="fas fa-shield"></i> Auth = bot admin w/o chat admin.</div>
       </div>
 
-      <!-- ██ BLACKLIST (CHAT+USER) ██ -->
+      <!-- ███ BLACKLIST – red mood ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-ban"></i>
           <h2>Blacklist</h2>
         </div>
-        <div style="display:flex; gap:0.4rem; align-items:center; margin-bottom:0.5rem; color:#b3d6ff; font-size:0.8rem;"><i class="fas fa-message-slash"></i> Chat blacklist</div>
+        <div style="display:flex; gap:0.4rem; align-items:center; margin-bottom:0.5rem; color:#ffc2c2; font-size:0.8rem;"><i class="fas fa-message-slash"></i> Chat blacklist</div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-ban" style="color:#ff9999;"></i></span><span class="cmd-name">/blacklistchat [id]</span><span class="cmd-desc">Blacklist chat</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-ban" style="color:#ff9e9e;"></i></span><span class="cmd-name">/blacklistchat [id]</span><span class="cmd-desc">Blacklist chat</span></div>
           <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-check-circle"></i></span><span class="cmd-name">/whitelistchat [id]</span><span class="cmd-desc">Whitelist</span></div>
           <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-list"></i></span><span class="cmd-name">/blacklistedchat</span><span class="cmd-desc">Show blacklisted</span></div>
         </div>
-        <div style="display:flex; gap:0.4rem; margin:1rem 0 0.3rem; color:#ffb6b6; font-size:0.8rem;"><i class="fas fa-user-slash"></i> Block users</div>
+        <div style="display:flex; gap:0.4rem; margin:1rem 0 0.3rem; color:#ffbebe; font-size:0.8rem;"><i class="fas fa-user-slash"></i> Block users</div>
         <div class="cmd-list">
           <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-hand"></i></span><span class="cmd-name">/block [reply/username]</span><span class="cmd-desc">Block user</span></div>
           <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-hand-peace"></i></span><span class="cmd-name">/unblock</span><span class="cmd-desc">Unblock</span></div>
@@ -390,7 +438,7 @@
         </div>
       </div>
 
-      <!-- ██ BROADCAST (SUDO) ██ -->
+      <!-- ███ BROADCAST – sudo red ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-bullhorn"></i>
@@ -398,13 +446,13 @@
           <span class="badge"><i class="fas fa-crown"></i> sudo</span>
         </div>
         <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-megaphone"></i></span><span class="cmd-name">/broadcast [msg/reply]</span><span class="cmd-desc">To all chats</span></div>
-        <div style="margin-top: 0.6rem; padding: 0.5rem; background: #0e202c; border-radius: 16px; font-size:0.75rem;">
-          <i class="fas fa-tags" style="color:#8ac1f0;"></i> <strong>Modes:</strong> -pin, -pinloud, -user, -nobot
+        <div style="margin-top: 0.6rem; padding: 0.5rem; background: rgba(70, 20, 20, 0.4); backdrop-filter: blur(12px); border-radius: 20px; font-size:0.74rem; border:0.5px solid rgba(255,120,120,0.5);">
+          <i class="fas fa-tags" style="color:#ffa8a8;"></i> <strong>Modes:</strong> -pin, -pinloud, -user, -nobot
         </div>
         <div class="note"><i class="fas fa-flask"></i> /broadcast -user -pin hello</div>
       </div>
 
-      <!-- ██ PING & STATS ██ -->
+      <!-- ███ PING & STATS ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-chart-simple"></i>
@@ -416,7 +464,7 @@
         </div>
       </div>
 
-      <!-- ██ PLAY MODULE ██ -->
+      <!-- ███ PLAY MODULE – crimson ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-circle-play"></i>
@@ -431,7 +479,7 @@
         <div class="channel-hint"><i class="fas fa-video"></i> c=channel, v=video, force=interrupt</div>
       </div>
 
-      <!-- ██ SUDO MODULE ██ -->
+      <!-- ███ SUDO MODULE ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-crown"></i>
@@ -446,7 +494,7 @@
         </div>
       </div>
 
-      <!-- ██ ACTIVE VCs ██ -->
+      <!-- ███ ACTIVE VCs ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-video"></i>
@@ -459,7 +507,7 @@
         </div>
       </div>
 
-      <!-- ██ START / SETTINGS / PANEL ██ -->
+      <!-- ███ START / SETTINGS / PANEL ███ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-gear"></i>
@@ -477,32 +525,32 @@
       </div>
     </div> <!-- end grid -->
 
-    <!-- feature strip — super compact -->
+    <!-- feature strip — red glass -->
     <div class="feature-strip">
-      <span><i class="fas fa-link" style="color:#9acdff;"></i> <strong>c-prefix:</strong> +c</span>
+      <span><i class="fas fa-link" style="color:#ffb3b3;"></i> <strong>c-prefix:</strong> +c</span>
       <span><i class="fas fa-arrows-spin"></i> <strong>Loop:</strong> 1-10/off</span>
       <span><i class="fas fa-camera"></i> <strong>Thumb:</strong> /thumbnail</span>
     </div>
 
-    <!-- buttons – finger ready -->
+    <!-- buttons — glass red/black/white -->
     <div class="button-panel">
       <button class="btn btn-primary" onclick="window.open('https://t.me/NezukoMusicBot', '_blank')"><i class="fab fa-telegram"></i> Start Bot</button>
       <button class="btn" onclick="window.open('https://t.me/VibeBots', '_blank')"><i class="fas fa-satellite-dish"></i> Updates</button>
       <button class="btn" onclick="window.open('https://t.me/VibeBotsSupport', '_blank')"><i class="fas fa-message"></i> Support</button>
     </div>
 
-    <!-- footer super light -->
+    <!-- footer – deep red elegance -->
     <hr />
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; font-size:0.7rem; color:#a0bedd;">
+    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; font-size:0.7rem; color:#ffd1d1;">
       <span><i class="fas fa-shield"></i> Admin+Auth</span>
       <span><i class="fas fa-sliders-up"></i> Playback</span>
       <span><i class="fas fa-crown"></i> Sudo panel</span>
     </div>
 
     <footer class="footer">
-      <p><i class="fas fa-headphones-simple"></i> NezukoMusic · official command center  |  all text english  |  © 2026 VibeBots</p>
+      <p><i class="fas fa-headphones-simple"></i> NezukoMusic · red glass command center  |  all text english  |  © 2026 VibeBots</p>
       <p style="margin-top: 0.5rem;"><a href="#"><i class="fas fa-lock"></i> Privacy</a> • <a href="#"><i class="fas fa-book-open"></i> Docs</a> • <a href="https://t.me/VibeBots"><i class="fab fa-telegram"></i> @VibeBots</a></p>
-      <p style="opacity:0.5; margin-top:0.9rem; font-size:0.65rem;"><i class="fas fa-circle-check"></i> 100% icons · mobile compact · official vibe</p>
+      <p style="opacity:0.7; margin-top:0.9rem; font-size:0.65rem;"><i class="fas fa-circle-check"></i> red · black · white · glassmorphism · 100% icons</p>
     </footer>
 
   </div> <!-- container end -->
