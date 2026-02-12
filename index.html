@@ -1,562 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
-  <title>NEZUKOMUSIC · RED GLASS</title>
-  <!-- Font Awesome 6 (pure icons, zero emoji) -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Telegram webapp (optional) -->
-  <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    /* ---------- RED · BLACK · WHITE · GLASSMORPHISM ---------- */
-    /* PHONE FIRST · COMPACT · OFFICIAL VIBE · BLOOD & LIGHT */
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      background: #0b0303;  /* blackest black with red soul */
-      background: radial-gradient(circle at 20% 30%, #1f0c0c, #050101);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #fff5f5;
-      padding: 1.2rem 1rem;
-      line-height: 1.5;
-      min-height: 100vh;
-      position: relative;
-    }
-
-    /* ---- RED GLASS OVERLAY (morph) ---- */
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: 
-        radial-gradient(circle at 80% 10%, rgba(200, 40, 40, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(190, 30, 30, 0.08) 0%, transparent 50%),
-        repeating-linear-gradient(45deg, rgba(255, 70, 70, 0.02) 0px, rgba(255, 70, 70, 0.02) 2px, transparent 2px, transparent 8px);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* subtle grid – black/white/red tension */
-    body::after {
-      content: "";
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-image: 
-        linear-gradient(rgba(255, 80, 80, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 80, 80, 0.04) 1px, transparent 1px);
-      background-size: 28px 28px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 10;
-    }
-
-    /* ----- GLASS HEADER – RED / BLACK / WHITE ----- */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 1.8rem;
-    }
-
-    .brand-icon {
-      font-size: 2.8rem;
-      background: rgba(30, 10, 10, 0.45);
-      backdrop-filter: blur(12px);
-      width: 80px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 30% 70% 70% 30% / 50% 50% 50% 50%;
-      color: #ffb8b8;
-      border: 1.5px solid rgba(255, 80, 80, 0.5);
-      box-shadow: 0 15px 35px rgba(180, 20, 20, 0.25), 0 0 0 1px rgba(255, 120, 120, 0.15);
-      margin-bottom: 0.7rem;
-      text-shadow: 0 0 12px #ff3b3b;
-    }
-
-    .brand-icon i {
-      filter: drop-shadow(0 0 12px #ff4f4f);
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(to right, #fff9f9, #ffc2c2, #ff8a8a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 0.2rem;
-      text-shadow: 0 0 18px #ff3b3b80;
-    }
-
-    .bot-tagline {
-      font-size: 0.78rem;
-      background: rgba(30, 10, 10, 0.5);
-      backdrop-filter: blur(16px);
-      padding: 0.45rem 1.4rem;
-      border-radius: 50px;
-      border: 0.6px solid rgba(255, 100, 100, 0.6);
-      color: #ffeaea;
-      display: inline-flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.4rem;
-      font-weight: 500;
-    }
-
-    .tag-icon {
-      color: #ffa0a0;
-    }
-
-    /* ========== GLASS CARDS — RED/BLACK/WHITE, MORPH, COMPACT ========= */
-    .module-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1.1rem;
-    }
-
-    .card {
-      background: rgba(20, 8, 8, 0.55);   /* deep black-red glass */
-      backdrop-filter: blur(18px) saturate(180%);
-      -webkit-backdrop-filter: blur(18px) saturate(180%);
-      border: 0.8px solid rgba(255, 90, 90, 0.4);
-      border-radius: 32px;
-      padding: 1.2rem 1.2rem;
-      box-shadow: 0 20px 40px -12px rgba(150, 0, 0, 0.3), inset 0 0 0 0.5px rgba(255, 200, 200, 0.15);
-      transition: all 0.2s ease;
-    }
-
-    .card:active {
-      background: rgba(40, 12, 12, 0.7);
-      border-color: rgba(255, 80, 80, 0.8);
-    }
-
-    /* card header — red accents */
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-bottom: 1px solid rgba(255, 120, 120, 0.4);
-      padding-bottom: 0.7rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .card-header i {
-      font-size: 1.45rem;
-      width: 1.8rem;
-      color: #ffaeae;  /* soft red-white */
-      text-shadow: 0 0 8px #ff5e5e;
-    }
-
-    .card-header h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #ffe4e4;
-      letter-spacing: -0.01em;
-    }
-
-    .badge {
-      background: rgba(150, 30, 30, 0.5);
-      backdrop-filter: blur(4px);
-      border-radius: 40px;
-      padding: 0.15rem 0.8rem;
-      font-size: 0.6rem;
-      font-weight: 700;
-      color: #ffd9d9;
-      border: 0.6px solid rgba(255, 110, 110, 0.8);
-      margin-left: 0.2rem;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
-    /* ----- command items – white/red, glassy ----- */
-    .cmd-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.55rem;
-    }
-
-    .cmd-item {
-      display: flex;
-      align-items: baseline;
-      gap: 0.4rem;
-      font-size: 0.82rem;
-      padding: 0.2rem 0;
-      border-bottom: 1px dashed rgba(255, 120, 120, 0.3);
-    }
-
-    .cmd-icon {
-      min-width: 1.4rem;
-      font-size: 0.9rem;
-      color: #ffb4b4; /* soft red */
-      text-align: center;
-    }
-
-    .cmd-name {
-      background: rgba(60, 20, 20, 0.6);
-      backdrop-filter: blur(4px);
-      padding: 0.15rem 0.8rem;
-      border-radius: 30px;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      font-weight: 600;
-      color: #ffefef;
-      border: 0.6px solid rgba(255, 130, 130, 0.6);
-      font-size: 0.76rem;
-      white-space: nowrap;
-    }
-
-    .cmd-desc {
-      color: #f0dada;
-      font-weight: 400;
-      font-size: 0.78rem;
-      line-height: 1.3;
-    }
-
-    .channel-hint, .note {
-      margin-top: 0.8rem;
-      padding: 0.45rem 1rem;
-      background: rgba(70, 20, 20, 0.4);
-      backdrop-filter: blur(12px);
-      border-left: 5px solid #ff6a6a;
-      border-radius: 20px;
-      color: #ffe5e5;
-      font-size: 0.75rem;
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      border: 0.5px solid rgba(255, 120, 120, 0.5);
-    }
-
-    .channel-hint i, .note i {
-      color: #ffa2a2;
-      font-size: 0.9rem;
-    }
-
-    .channel-hint {
-      background: rgba(60, 20, 20, 0.4);
-      border-left-color: #ff8888;
-    }
-
-    /* feature strip — red glass */
-    .feature-strip {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(30, 10, 10, 0.5);
-      backdrop-filter: blur(20px);
-      margin: 1.5rem 0 1rem;
-      padding: 0.7rem 1.3rem;
-      border-radius: 60px;
-      border: 0.8px solid rgba(255, 110, 110, 0.6);
-      font-size: 0.74rem;
-      gap: 0.5rem;
-      color: #ffdbdb;
-    }
-
-    .feature-strip span {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .feature-strip i {
-      color: #ff9f9f;
-    }
-
-    /* ----- buttons – black/red/white, glass ----- */
-    .button-panel {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.7rem;
-      margin: 2rem 0 1.2rem;
-    }
-
-    .btn {
-      background: rgba(25, 10, 10, 0.55);
-      backdrop-filter: blur(16px);
-      border: 0.8px solid rgba(255, 100, 100, 0.7);
-      border-radius: 60px;
-      padding: 0.55rem 1.4rem;
-      color: white;
-      font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-      box-shadow: 0 6px 14px rgba(120, 0, 0, 0.2);
-    }
-
-    .btn i {
-      color: #ffc0c0;
-    }
-
-    .btn-primary {
-      background: rgba(180, 40, 40, 0.75);
-      backdrop-filter: blur(16px);
-      border-color: #ff8a8a;
-      color: white;
-      text-shadow: 0 0 6px white;
-    }
-
-    .btn-primary i {
-      color: white;
-    }
-
-    .btn:active {
-      background: rgba(200, 60, 60, 0.8);
-      border-color: #ffc0c0;
-    }
-
-    hr {
-      border: none;
-      height: 0.8px;
-      background: linear-gradient(90deg, transparent, rgba(255, 100, 100, 0.7), transparent);
-      margin: 1.5rem 0;
-    }
-
-    .footer {
-      text-align: center;
-      color: #ffcaca;
-      font-size: 0.72rem;
-    }
-
-    .footer a {
-      color: #ffc2c2;
-      text-decoration: none;
-      border-bottom: 0.5px dotted rgba(255, 160, 160, 0.7);
-    }
-
-    @media (max-width: 400px) {
-      .cmd-name { white-space: normal; word-break: break-word; }
-    }
-
-    /* ---- RED GLASS SCROLLBAR ---- */
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #1a0808;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #a04040;
-      border-radius: 10px;
-    }
-
-    /* all emojis banned — only font awesome icons */
-  </style>
-</head>
-<body>
-  <div class="container">
-
-    <!-- ===== RED GLASS HERO ===== -->
-    <div class="hero">
-      <div class="brand-icon">
-        <i class="fas fa-headphones-simple"></i>
-      </div>
-      <h1>NezukoMusic</h1>
-      <div class="bot-tagline">
-        <i class="fas fa-microchip tag-icon"></i> voice+video
-        <i class="fas fa-circle" style="font-size: 0.3rem; color: #ff8a8a;"></i>
-        <i class="fas fa-shield-hal tag-icon"></i> admin suite
-        <i class="fas fa-circle" style="font-size: 0.3rem; color: #ff8a8a;"></i>
-        <i class="fas fa-sliders-h tag-icon"></i> 12 modules
-      </div>
-    </div>
-
-    <!-- ========== ALL MODULES – RED/BLACK GLASS, COMPACT, ICONS ========= -->
-    <div class="module-grid">
-
-      <!-- ███ ADMIN MODULE — blood glass ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-shield-hooded"></i>
-          <h2>Admin</h2>
-          <span class="badge"><i class="fas fa-layer-group" style="margin-right: 2px;"></i> c·prefix</span>
-        </div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-pause-circle"></i></span><span class="cmd-name">/pause</span><span class="cmd-desc">Pause stream</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-play-circle"></i></span><span class="cmd-name">/resume</span><span class="cmd-desc">Resume</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-forward-step"></i></span><span class="cmd-name">/skip</span><span class="cmd-desc">Skip track</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-stop-circle"></i></span><span class="cmd-name">/end or /stop</span><span class="cmd-desc">Clear & end</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-list-ul"></i></span><span class="cmd-name">/queue</span><span class="cmd-desc">Queued tracks</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-rotate-right"></i></span><span class="cmd-name">/loop [1-10/disable]</span><span class="cmd-desc">Loop 10x/custom</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-random"></i></span><span class="cmd-name">/shuffle</span><span class="cmd-desc">Shuffle queue</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-forward"></i></span><span class="cmd-name">/seek</span><span class="cmd-desc">Seek fwd</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-backward"></i></span><span class="cmd-name">/seekback</span><span class="cmd-desc">Backward seek</span></div>
-        </div>
-        <div class="channel-hint"><i class="fas fa-broadcast-tower"></i> add 'c' for channel: /cpause, /cskip ...</div>
-      </div>
-
-      <!-- ███ AUTH MODULE ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-user-check"></i>
-          <h2>Auth</h2>
-          <span class="badge"><i class="fas fa-key"></i> admin rights</span>
-        </div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-user-plus"></i></span><span class="cmd-name">/auth [username]</span><span class="cmd-desc">Add auth user</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-user-minus"></i></span><span class="cmd-name">/unauth [username]</span><span class="cmd-desc">Remove</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-users"></i></span><span class="cmd-name">/authusers</span><span class="cmd-desc">List auth users</span></div>
-        </div>
-        <div class="note"><i class="fas fa-shield"></i> Auth = bot admin w/o chat admin.</div>
-      </div>
-
-      <!-- ███ BLACKLIST – red mood ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-ban"></i>
-          <h2>Blacklist</h2>
-        </div>
-        <div style="display:flex; gap:0.4rem; align-items:center; margin-bottom:0.5rem; color:#ffc2c2; font-size:0.8rem;"><i class="fas fa-message-slash"></i> Chat blacklist</div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-ban" style="color:#ff9e9e;"></i></span><span class="cmd-name">/blacklistchat [id]</span><span class="cmd-desc">Blacklist chat</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-check-circle"></i></span><span class="cmd-name">/whitelistchat [id]</span><span class="cmd-desc">Whitelist</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-list"></i></span><span class="cmd-name">/blacklistedchat</span><span class="cmd-desc">Show blacklisted</span></div>
-        </div>
-        <div style="display:flex; gap:0.4rem; margin:1rem 0 0.3rem; color:#ffbebe; font-size:0.8rem;"><i class="fas fa-user-slash"></i> Block users</div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-hand"></i></span><span class="cmd-name">/block [reply/username]</span><span class="cmd-desc">Block user</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-hand-peace"></i></span><span class="cmd-name">/unblock</span><span class="cmd-desc">Unblock</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-clipboard-list"></i></span><span class="cmd-name">/blockedusers</span><span class="cmd-desc">List blocked</span></div>
-        </div>
-      </div>
-
-      <!-- ███ BROADCAST – sudo red ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-bullhorn"></i>
-          <h2>Broadcast</h2>
-          <span class="badge"><i class="fas fa-crown"></i> sudo</span>
-        </div>
-        <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-megaphone"></i></span><span class="cmd-name">/broadcast [msg/reply]</span><span class="cmd-desc">To all chats</span></div>
-        <div style="margin-top: 0.6rem; padding: 0.5rem; background: rgba(70, 20, 20, 0.4); backdrop-filter: blur(12px); border-radius: 20px; font-size:0.74rem; border:0.5px solid rgba(255,120,120,0.5);">
-          <i class="fas fa-tags" style="color:#ffa8a8;"></i> <strong>Modes:</strong> -pin, -pinloud, -user, -nobot
-        </div>
-        <div class="note"><i class="fas fa-flask"></i> /broadcast -user -pin hello</div>
-      </div>
-
-      <!-- ███ PING & STATS ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-chart-simple"></i>
-          <h2>Ping & Stats</h2>
-        </div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-wifi"></i></span><span class="cmd-name">/ping</span><span class="cmd-desc">Ping + system stats</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-chart-column"></i></span><span class="cmd-name">/stats</span><span class="cmd-desc">Top tracks, users, chats</span></div>
-        </div>
-      </div>
-
-      <!-- ███ PLAY MODULE – crimson ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-circle-play"></i>
-          <h2>Play</h2>
-          <span class="badge"><i class="fas fa-clapperboard"></i> v/c/force</span>
-        </div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-music"></i></span><span class="cmd-name">/play /vplay /cplay</span><span class="cmd-desc">Stream a/v/ch</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-bolt"></i></span><span class="cmd-name">/playforce /vplayforce /cplayforce</span><span class="cmd-desc">Force play</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-tower-broadcast"></i></span><span class="cmd-name">/channelplay [chat/disable]</span><span class="cmd-desc">Connect channel</span></div>
-        </div>
-        <div class="channel-hint"><i class="fas fa-video"></i> c=channel, v=video, force=interrupt</div>
-      </div>
-
-      <!-- ███ SUDO MODULE ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-crown"></i>
-          <h2>Sudo</h2>
-          <span class="badge"><i class="fas fa-coins"></i> paid/free</span>
-        </div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-plus-circle"></i></span><span class="cmd-name">/sudo</span><span class="cmd-desc">Add sudo user</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-minus-circle"></i></span><span class="cmd-name">/rmsudo</span><span class="cmd-desc">Remove sudo</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-list"></i></span><span class="cmd-name">/sudolist</span><span class="cmd-desc">List sudo</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-trash-alt"></i></span><span class="cmd-name">/delallsudo</span><span class="cmd-desc">Remove all — paid</span></div>
-        </div>
-      </div>
-
-      <!-- ███ ACTIVE VCs ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-video"></i>
-          <h2>Active VC</h2>
-        </div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-headphones"></i></span><span class="cmd-name">/activevoice</span><span class="cmd-desc">Active voicechats</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-camcorder"></i></span><span class="cmd-name">/activevideo</span><span class="cmd-desc">Active videochats</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-clock"></i></span><span class="cmd-name">/autoend [on/off]</span><span class="cmd-desc">Auto end if alone</span></div>
-        </div>
-      </div>
-
-      <!-- ███ START / SETTINGS / PANEL ███ -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-gear"></i>
-          <h2>Start & Settings</h2>
-        </div>
-        <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-rocket"></i></span><span class="cmd-name">/start</span><span class="cmd-desc">Launch</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-circle-question"></i></span><span class="cmd-name">/help</span><span class="cmd-desc">Help menu</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-rotate"></i></span><span class="cmd-name">/reboot</span><span class="cmd-desc">Reboot chat</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-sliders"></i></span><span class="cmd-name">/settings</span><span class="cmd-desc">Inline settings</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-tablet-screen-button"></i></span><span class="cmd-name">/panel</span><span class="cmd-desc">[owner] API, cookies</span></div>
-          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-image"></i></span><span class="cmd-name">/thumbnail : on/off</span><span class="cmd-desc">Toggle thumbnail</span></div>
-        </div>
-        <div class="note"><i class="fas fa-lock"></i> /panel → owner only: api, cookies, startpic</div>
-      </div>
-    </div> <!-- end grid -->
-
-    <!-- feature strip — red glass -->
-    <div class="feature-strip">
-      <span><i class="fas fa-link" style="color:#ffb3b3;"></i> <strong>c-prefix:</strong> +c</span>
-      <span><i class="fas fa-arrows-spin"></i> <strong>Loop:</strong> 1-10/off</span>
-      <span><i class="fas fa-camera"></i> <strong>Thumb:</strong> /thumbnail</span>
-    </div>
-
-    <!-- buttons — glass red/black/white -->
-    <div class="button-panel">
-      <button class="btn btn-primary" onclick="window.open('https://t.me/NezukoMusicBot', '_blank')"><i class="fab fa-telegram"></i> Start Bot</button>
-      <button class="btn" onclick="window.open('https://t.me/VibeBots', '_blank')"><i class="fas fa-satellite-dish"></i> Updates</button>
-      <button class="btn" onclick="window.open('https://t.me/VibeBotsSupport', '_blank')"><i class="fas fa-message"></i> Support</button>
-    </div>
-
-    <!-- footer – deep red elegance -->
-    <hr />
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; font-size:0.7rem; color:#ffd1d1;">
-      <span><i class="fas fa-shield"></i> Admin+Auth</span>
-      <span><i class="fas fa-sliders-up"></i> Playback</span>
-      <span><i class="fas fa-crown"></i> Sudo panel</span>
-    </div>
-
-    <footer class="footer">
-      <p><i class="fas fa-headphones-simple"></i> NezukoMusic · red glass command center  |  all text english  |  © 2026 VibeBots</p>
-      <p style="margin-top: 0.5rem;"><a href="#"><i class="fas fa-lock"></i> Privacy</a> • <a href="#"><i class="fas fa-book-open"></i> Docs</a> • <a href="https://t.me/VibeBots"><i class="fab fa-telegram"></i> @VibeBots</a></p>
-      <p style="opacity:0.7; margin-top:0.9rem; font-size:0.65rem;"><i class="fas fa-circle-check"></i> red · black · white · glassmorphism · 100% icons</p>
-    </footer>
-
-  </div> <!-- container end -->
-
-  <script>
-    (function() { if (window.Telegram && Telegram.WebApp) { Telegram.WebApp.ready(); } })();
-  </script>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link
+rel="preload" href="/_next/static/media/93f479601ee12b01-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/_next/static/media/9cc5b37ab1350db7-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/_next/static/media/de42cfb9a3b980ae-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="preload" href="/_next/static/media/e6099e249fd938cc-s.p.woff2" as="font" crossorigin="" type="font/woff2"/><link rel="stylesheet" href="/_next/static/css/777afcd9c865b706.css" data-precedence="next"/><link rel="stylesheet" href="/_next/static/css/a886cf98adcf49be.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-0c954b06aeb5e756.js"/><script src="/_next/static/chunks/394b2dc4-8668c5fdfd69c8b5.js" async=""></script><script src="/_next/static/chunks/570-50632e2ab0f3caf7.js" async=""></script><script src="/_next/static/chunks/main-app-5d844e813918cdf9.js" async=""></script><script src="/_next/static/chunks/18-44c832a92f861b68.js" async=""></script><script src="/_next/static/chunks/app/page-f4d364c6c8881dba.js" async=""></script><meta name="next-size-adjust" content=""/><title>Vortex - Premium Music Experience</title><meta name="description" content="Elevate your music journey with Vortex"/><style>
+html {
+  font-family: 'Figtree', 'Figtree Fallback';
+  --font-sans: __variable_689e3f;
+  --font-mono: __variable_9a8899;
+  --font-instrument-serif: __variable_1f5468;
+}
+        </style><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body class="__variable_689e3f __variable_9a8899 __variable_1f5468"><div class="relative w-full min-h-screen bg-black"><div class="fixed inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"><svg class="absolute inset-0 w-0 h-0"><defs><filter id="glass-effect" x="-50%" y="-50%" width="200%" height="200%"><feTurbulence baseFrequency="0.005" numOctaves="1" result="noise"></feTurbulence><feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3"></feDisplacementMap><feColorMatrix type="matrix" values="1 0 0 0 0.02 0 1 0 0 0.02 0 0 1 0 0.05 0 0 0 0.9 0" result="tint"></feColorMatrix></filter><filter id="gooey-filter" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"></feGaussianBlur><feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="gooey"></feColorMatrix><feComposite in="SourceGraphic" in2="gooey" operator="atop"></feComposite></filter></defs></svg><div class="absolute inset-0 w-full h-full"></div><div class="absolute inset-0 w-full h-full opacity-60"></div></div><div class="relative z-10"><header class="relative z-30 flex items-center
+justify-between p-3 md:p-3 bg-black/20 backdrop-blur-md border border-white/10 rounded-3xl m-4 md:m-6"><div class="flex items-center gap-2"><span class="text-white font-semibold text-sm md:text-base uppercase tracking-wider">Vortex</span></div><nav class="hidden md:flex items-center space-x-0.5"><button class="text-white/80 hover:text-white text-xs md:text-sm font-medium px-2 md:px-3 py-2 md:py-1.5 rounded-full hover:bg-white/10 transition-all duration-200">Features</button><button class="text-white/80 hover:text-white text-xs md:text-sm font-medium px-2 md:px-3 py-2 md:py-1.5 rounded-full hover:bg-white/10 transition-all duration-200">Versions</button><button class="text-white/80 hover:text-white text-xs md:text-sm font-medium px-2 md:px-3 py-2 md:py-1.5 rounded-full hover:bg-white/10 transition-all duration-200">Download</button><button class="text-white/80 hover:text-white text-xs md:text-sm font-medium px-2 md:px-3 py-2 md:py-1.5 rounded-full hover:bg-white/10 transition-all duration-200">Contact</button></nav><button class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Toggle menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu h-5 w-5"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg></button></header><div class="fixed top-0 right-0 z-20 h-full w-64 bg-black/95 backdrop-blur-xl border-l border-white/10 transform transition-transform duration-300 ease-in-out md:hidden translate-x-full"><nav class="flex flex-col p-6 pt-24 space-y-2"><button class="text-white/90 hover:text-white text-base font-medium px-4 py-3 rounded-xl hover:bg-white/10 transition-all duration-200 text-left">Features</button><button class="text-white/90 hover:text-white text-base font-medium px-4 py-3 rounded-xl hover:bg-white/10 transition-all duration-200 text-left">Versions</button><button class="text-white/90 hover:text-white text-base font-medium px-4 py-3 rounded-xl hover:bg-white/10 transition-all duration-200 text-left">Download</button><button class="text-white/90 hover:text-white text-base font-medium px-4 py-3 rounded-xl hover:bg-white/10 transition-all duration-200 text-left">Contact</button></nav></div><main class="jsx-632ab5be2eef983d relative min-h-screen w-full text-white z-10 pt-12"><section id="home" class="jsx-632ab5be2eef983d relative z-10
+mx-auto flex max-w-6xl flex-col items-center px-4 pb-16 md:pb-24 pt-8 md:pt-12 lg:pt-16"><span class="jsx-632ab5be2eef983d mb-3 md:mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 md:px-4 py-1 md:py-1.5 text-xs uppercase tracking-[0.2em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur">Ultimate Music Experience</span><h1 class="jsx-632ab5be2eef983d mx-auto max-w-4xl text-center text-2xl md:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-white drop-shadow">Elevate Your<!-- --> <span class="jsx-632ab5be2eef983d bg-gradient-to-r from-[#c084fc] via-[#a78bfa] to-[#60a5fa] bg-clip-text text-transparent">Music</span> <!-- -->Journey</h1><p class="jsx-632ab5be2eef983d mt-3 md:mt-4 max-w-3xl text-center text-sm md:text-base text-white/70">Vortex delivers unparalleled sound quality with an intuitive interface designed for true music lovers. Experience your favorite tracks like never before.</p><div class="jsx-632ab5be2eef983d mt-6 md:mt-8 flex w-full flex-col items-center justify-center gap-3 sm:gap-4 sm:flex-row"><a data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary text-primary-foreground hover:bg-primary/90 py-2 has-[&gt;svg]:px-3 h-11 md:h-12 rounded-full !bg-white !text-black px-6 text-sm md:text-base font-semibold shadow-[0_6px_30px_rgba(255,255,255,0.15)] hover:!bg-white/90 w-full sm:w-auto" href="#download"><span class="jsx-632ab5be2eef983d mr-2">Download Now</span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24
+24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right h-4 w-4"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a><a data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none
+[&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:hover:bg-accent/50 py-2 has-[&gt;svg]:px-3 h-11 md:h-12 rounded-full border border-white/15 bg-white/5 px-6 text-sm md:text-base font-semibold text-white/90 shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_8px_40px_rgba(0,0,0,0.35)] hover:bg-white/10 hover:text-white w-full sm:w-auto" href="#features">Explore Features</a></div><div class="jsx-632ab5be2eef983d mt-8 md:mt-10 grid w-full max-w-3xl grid-cols-1 gap-3 md:gap-4 sm:grid-cols-3"><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-4 md:p-6 text-center backdrop-blur"><div class="jsx-632ab5be2eef983d flex items-center justify-center gap-1 text-xl md:text-3xl font-bold">17.2k+<!-- --> </div><div class="jsx-632ab5be2eef983d text-xs text-white/70">Users</div></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-4 md:p-6 text-center backdrop-blur"><div class="jsx-632ab5be2eef983d flex items-center justify-center gap-1 text-xl md:text-3xl font-bold">5<!-- --> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star h-4 w-4 md:h-5 md:w-5 fill-white text-white"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0
+0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"></path></svg></div><div class="jsx-632ab5be2eef983d text-xs text-white/70">App Rating</div></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-4 md:p-6 text-center backdrop-blur"><div class="jsx-632ab5be2eef983d flex items-center justify-center gap-1 text-xl md:text-3xl font-bold">900M - 1B+<!-- --> </div><div class="jsx-632ab5be2eef983d text-xs text-white/70">Songs</div></div></div></section><section id="features" class="jsx-632ab5be2eef983d relative z-10 py-16 md:py-24"><div class="jsx-632ab5be2eef983d container mx-auto max-w-6xl px-4"><div class="jsx-632ab5be2eef983d section-header mb-10 md:mb-14 text-center"><span class="jsx-632ab5be2eef983d mb-3 md:mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 md:px-4 py-1
+md:py-1.5 text-xs uppercase tracking-[0.2em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur">why choose vortex ?</span><h2 class="jsx-632ab5be2eef983d mt-2 md:mt-3 text-2xl md:text-3xl lg:text-4xl font-extrabold text-white">Unmatched Features</h2><p class="jsx-632ab5be2eef983d mx-auto mt-2 max-w-2xl text-sm md:text-base text-white/70">Dive into Vortex and discover a new dimension of music.</p></div><div class="jsx-632ab5be2eef983d grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3"><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-2 hover:shadow-[0_15px_60px_rgba(0,0,0,0.3)]"><div class="jsx-632ab5be2eef983d mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-transparent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music h-6 w-6 md:h-7 md:w-7"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg md:text-xl font-semibold">High-Definition Audio</h3><p class="jsx-632ab5be2eef983d text-sm md:text-base text-white/70">Experience crystal clear sound with our 24-bit audio processing technology.</p></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-2 hover:shadow-[0_15px_60px_rgba(0,0,0,0.3)]"><div class="jsx-632ab5be2eef983d mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-transparent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smile h-6 w-6 md:h-7 md:w-7"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" x2="9.01" y1="9" y2="9"></line><line x1="15" x2="15.01" y1="9" y2="9"></line></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg md:text-xl font-semibold">AI
+Recommendations</h3><p class="jsx-632ab5be2eef983d text-sm md:text-base text-white/70">Discover music tailored to your taste with smart autoplay and suggestions.</p></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-2 hover:shadow-[0_15px_60px_rgba(0,0,0,0.3)]"><div class="jsx-632ab5be2eef983d mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-transparent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-paintbrush h-6 w-6 md:h-7 md:w-7"><path d="m14.622 17.897-10.68-2.913"></path><path d="M18.376 2.622a1 1 0 1 1 3.002 3.002L17.36 9.643a.5.5 0 0 0 0 .707l.944.944a2.41 2.41 0 0 1 0 3.408l-.944.944a.5.5 0 0 1-.707 0L8.354 7.348a.5.5 0 0 1 0-.707l.944-.944a2.41 2.41 0 0 1 3.408 0l.944.944a.5.5 0 0 0 .707 0z"></path><path d="M9 8c-1.804 2.71-3.97 3.46-6.583 3.948a.507.507 0 0 0-.302.819l7.32 8.883a1 1 0 0 0 1.185.204C12.735 20.405 16 16.792 16 15"></path></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg md:text-xl font-semibold">Sleek UI Design</h3><p class="jsx-632ab5be2eef983d text-sm md:text-base text-white/70">Navigate with ease through a modern, black-and-blue interface.</p></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-2 hover:shadow-[0_15px_60px_rgba(0,0,0,0.3)]"><div class="jsx-632ab5be2eef983d mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-transparent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shuffle h-6 w-6 md:h-7 md:w-7"><path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"></path><path d="m18 2 4 4-4 4"></path><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"></path><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"></path><path d="m18 14 4 4-4 4"></path></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg md:text-xl font-semibold">Cross-Platform Access</h3><p class="jsx-632ab5be2eef983d text-sm md:text-base text-white/70">Available on Android, Web, Telegram mini-app and Windows 10/11.</p></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-2 hover:shadow-[0_15px_60px_rgba(0,0,0,0.3)]"><div class="jsx-632ab5be2eef983d mb-4 inline-flex h-16 w-16
+items-center justify-center rounded-2xl bg-transparent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-6 w-6 md:h-7 md:w-7"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg md:text-xl font-semibold">Quick Search</h3><p class="jsx-632ab5be2eef983d text-sm md:text-base text-white/70">Find songs in playlists or albums
+instantly.</p></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur transition hover:-translate-y-2 hover:shadow-[0_15px_60px_rgba(0,0,0,0.3)]"><div class="jsx-632ab5be2eef983d mb-4 inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-transparent"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw h-6 w-6 md:h-7 md:w-7"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg md:text-xl font-semibold">Auto-Updating Playlists</h3><p class="jsx-632ab5be2eef983d text-sm md:text-base text-white/70">Stay updated with fresh music suggestions.</p></div></div></div></section><section id="versions" class="jsx-632ab5be2eef983d relative z-10 py-16 md:py-24"><div class="jsx-632ab5be2eef983d container mx-auto max-w-4xl px-4"><div class="jsx-632ab5be2eef983d text-center mb-10 md:mb-14"><span class="jsx-632ab5be2eef983d mb-3 md:mb-4 inline-flex items-center
+gap-2 rounded-full border border-white/15 bg-white/5 px-3 md:px-4 py-1 md:py-1.5 text-xs uppercase tracking-[0.2em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur">always improving</span><h2 class="jsx-632ab5be2eef983d mt-2 md:mt-3 text-2xl md:text-3xl lg:text-4xl font-extrabold">Version History</h2><p class="jsx-632ab5be2eef983d mx-auto mt-2 max-w-xl text-sm md:text-base text-white/70">Stay updated with our latest improvements and features</p></div><div class="jsx-632ab5be2eef983d mx-auto max-w-2xl space-y-3 md:space-y-4"><div class="jsx-632ab5be2eef983d to-animate relative overflow-hidden rounded-xl border border-white/20 bg-white/5 p-4 md:p-6 backdrop-blur-xl shadow-[0_0_40px_rgba(56,189,248,0.15)] group hover:shadow-[0_0_80px_rgba(139,92,246,0.3)] transition-all duration-500"><div class="jsx-632ab5be2eef983d absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-blue-500/10 opacity-50 group-hover:opacity-100 transition-opacity duration-500"></div><div class="jsx-632ab5be2eef983d absolute top-0 right-0 px-3 py-1 bg-gradient-to-r
+from-cyan-500 to-violet-600 text-[10px] font-bold uppercase tracking-wider text-white shadow-[0_2px_10px_rgba(139,92,246,0.3)] rounded-bl-xl z-10">Special Edition</div><div class="jsx-632ab5be2eef983d relative z-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4"><div class="jsx-632ab5be2eef983d flex items-start sm:items-center gap-3"><div class="jsx-632ab5be2eef983d min-w-0"><div class="jsx-632ab5be2eef983d flex flex-wrap items-center gap-3 mb-1"><h3
+class="jsx-632ab5be2eef983d text-base md:text-lg font-bold text-white">Vortex 3.10.1</h3><div class="jsx-632ab5be2eef983d flex items-center gap-2"><span class="jsx-632ab5be2eef983d text-[10px] px-1.5 py-0.5 rounded bg-white/10 text-white/60 font-medium">v2.1</span><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="jsx-632ab5be2eef983d w-3 h-3 text-white/40 animate-pulse"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" class="jsx-632ab5be2eef983d"></path></svg><span class="jsx-632ab5be2eef983d text-[10px] px-1.5 py-0.5 rounded bg-gradient-to-r from-cyan-500/20 to-violet-500/20 text-white font-bold animate-pulse">v3.10.1</span></div></div><span class="jsx-632ab5be2eef983d text-xs text-white/70 font-medium">Release Date: January 11, 2026</span></div></div></div><div class="jsx-632ab5be2eef983d relative z-10 space-y-3"><div class="jsx-632ab5be2eef983d"><h4 class="jsx-632ab5be2eef983d text-xs font-bold text-white mb-2 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brain h-3.5 w-3.5 text-white"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path><path
+d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path><path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path><path d="M19.938 10.5a4 4 0 0 1 .585.396"></path><path d="M6 18a4 4 0 0 1-1.967-.516"></path><path d="M19.967 17.484A4 4 0 0 1 18 18"></path></svg> Vortex AI Assistant <span class="jsx-632ab5be2eef983d text-[10px] bg-cyan-500/20 px-1.5 py-0.5 rounded">NEW</span></h4><ul class="jsx-632ab5be2eef983d space-y-1.5 text-xs text-white/80 ml-5"><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Personal AI assistant available anytime in the app</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Auto-optimization and personalized home
+page</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Trainable AI for your personal music
+preferences</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Mood Engine with adaptive &quot;Quick Picks&quot;</span></li><li class="jsx-632ab5be2eef983d flex items-start
+gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Language matching for
+better recommendations</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Learns from listening habits and behavior</span></li></ul></div><div class="jsx-632ab5be2eef983d"><h4 class="jsx-632ab5be2eef983d text-xs font-bold text-white mb-2 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-3.5 w-3.5 text-white"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Complete Auth &amp; Database <span class="jsx-632ab5be2eef983d text-[10px] bg-violet-500/20 px-1.5 py-0.5 rounded">NEW</span></h4><ul class="jsx-632ab5be2eef983d space-y-1.5 text-xs text-white/80 ml-5"><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Proper database setup with secure authentication</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span
+class="jsx-632ab5be2eef983d">User profiles with Plus/Admin status badges</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Secure login with phone verification</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Like button to save favorite songs</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Personalized listening history tracking</span></li></ul></div><div class="jsx-632ab5be2eef983d"><h4 class="jsx-632ab5be2eef983d text-xs font-bold text-white mb-2 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music2 h-3.5 w-3.5 text-white"><circle cx="8" cy="18" r="4"></circle><path d="M12 18V2l7 4"></path></svg> Enhanced Player</h4><ul class="jsx-632ab5be2eef983d space-y-1.5 text-xs text-white/80 ml-5"><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">High-quality audio streaming up to 320kbps</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Synchronized lyrics viewer for any song</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Glassmorphic UI with liquid progress bar</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Advanced
+sharing (Instagram-ready song cards)</span></li><li class="jsx-632ab5be2eef983d
+flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">All playback issues fixed</span></li></ul></div><div class="jsx-632ab5be2eef983d"><h4 class="jsx-632ab5be2eef983d text-xs font-bold text-white mb-2 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles h-3.5 w-3.5 text-white"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5
+9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg> New Features <span class="jsx-632ab5be2eef983d text-[10px] bg-purple-500/20 px-1.5 py-0.5 rounded">NEW</span></h4><ul class="jsx-632ab5be2eef983d space-y-1.5 text-xs text-white/80
+ml-5"><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Sleep Timer with auto-pause countdown</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span
+class="jsx-632ab5be2eef983d">Save Power Mode for low-end devices</span></li><li
+class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">AMOLED Black theme for battery saving</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Winter Special: Snow effect animation</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Lock Home to freeze feed during AI refresh</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Live community chat with developers</span></li></ul></div><div class="jsx-632ab5be2eef983d"><h4 class="jsx-632ab5be2eef983d text-xs font-bold text-white mb-2 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap h-3.5 w-3.5 text-white"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg> Performance &amp; Security</h4><ul class="jsx-632ab5be2eef983d space-y-1.5 text-xs text-white/80 ml-5"><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Significantly increased fetching speed</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Major security updates and improvements</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Fixed double-audio playback bug</span></li><li class="jsx-632ab5be2eef983d flex items-start gap-2"><span class="jsx-632ab5be2eef983d h-1 w-1 rounded-full bg-white/80 mt-1.5 flex-shrink-0"></span><span class="jsx-632ab5be2eef983d">Improved PWA stability</span></li></ul></div></div></div><details class="jsx-632ab5be2eef983d to-animate group"><summary class="jsx-632ab5be2eef983d flex cursor-pointer items-center justify-between rounded-xl bg-white/5 p-3 md:p-4 transition-all hover:bg-white/10"><span class="jsx-632ab5be2eef983d text-xs md:text-sm font-medium text-white/80">View Previous Versions</span><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="jsx-632ab5be2eef983d h-5 w-5 text-white/60 transition-transform group-open:rotate-180"><path stroke-linecap="round"
+stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" class="jsx-632ab5be2eef983d"></path></svg></summary><div class="jsx-632ab5be2eef983d mt-3 space-y-3
+md:space-y-4 border-t border-white/10 pt-3 md:pt-4"><div class="jsx-632ab5be2eef983d rounded-lg border border-white/10 bg-white/5 p-3 md:p-4 backdrop-blur"><div class="jsx-632ab5be2eef983d flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2 md:mb-3"><h3 class="jsx-632ab5be2eef983d text-sm md:text-base font-semibold">Vortex 2.1</h3><span class="jsx-632ab5be2eef983d rounded-md bg-white/10 px-2 py-1 text-xs text-white/70 whitespace-nowrap">Release Date: September 01, 2025</span></div><ul class="jsx-632ab5be2eef983d list-inside list-disc
+space-y-1 text-xs md:text-sm text-white/80"><li class="jsx-632ab5be2eef983d">Refined UI/UX</li><li class="jsx-632ab5be2eef983d">Faster fetch speed</li><li class="jsx-632ab5be2eef983d">Improved downloading speed</li><li class="jsx-632ab5be2eef983d">Stability upgrades</li></ul></div><div class="jsx-632ab5be2eef983d rounded-lg border border-white/10 bg-white/5 p-3 md:p-4 backdrop-blur"><div class="jsx-632ab5be2eef983d flex flex-col sm:flex-row sm:items-center sm:justify-between
+gap-2 mb-2 md:mb-3"><h3 class="jsx-632ab5be2eef983d text-sm md:text-base font-semibold">Vortex 2.0</h3><span class="jsx-632ab5be2eef983d rounded-md bg-white/10
+px-2 py-1 text-xs text-white/70 whitespace-nowrap">Release Date: June 05, 2025</span></div><ul class="jsx-632ab5be2eef983d list-inside list-disc space-y-1 text-xs md:text-sm text-white/80"><li class="jsx-632ab5be2eef983d">Brand New UI &amp; Theme</li><li class="jsx-632ab5be2eef983d">Playback Error Fixes</li><li class="jsx-632ab5be2eef983d">Optimized Buffering</li><li class="jsx-632ab5be2eef983d">AI-Powered Recommendations</li></ul></div><div class="jsx-632ab5be2eef983d rounded-lg border border-white/10 bg-white/5 p-3 md:p-4 backdrop-blur"><div class="jsx-632ab5be2eef983d flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2 md:mb-3"><h3 class="jsx-632ab5be2eef983d text-sm md:text-base font-semibold">Vortex 1.0</h3><span class="jsx-632ab5be2eef983d rounded-md bg-white/10 px-2 py-1 text-xs text-white/70 whitespace-nowrap">Release Date: January 22, 2025</span></div><ul class="jsx-632ab5be2eef983d list-inside list-disc space-y-1 text-xs md:text-sm text-white/80"><li class="jsx-632ab5be2eef983d">High-quality audio streaming</li><li class="jsx-632ab5be2eef983d">Custom playlist creation</li><li class="jsx-632ab5be2eef983d">Music history tracking</li><li class="jsx-632ab5be2eef983d">Bug fixes</li></ul></div></div><div class="jsx-632ab5be2eef983d mt-4 text-center"><a class="text-xs text-cyan-400 hover:text-cyan-300 hover:underline transition-colors" href="/changelog">View Full Version History →</a></div></details></div></div></section><section id="download" class="jsx-632ab5be2eef983d relative z-10 py-16 md:py-24"><div class="jsx-632ab5be2eef983d container mx-auto
+max-w-6xl px-4"><div class="jsx-632ab5be2eef983d section-header mb-10 md:mb-14 text-center"><span class="jsx-632ab5be2eef983d mb-3 md:mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 md:px-4 py-1 md:py-1.5 text-xs uppercase tracking-[0.2em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur">Get Started Today</span><h2 class="jsx-632ab5be2eef983d mt-2 md:mt-3 text-2xl md:text-3xl lg:text-4xl font-extrabold">Download Vortex</h2><p class="jsx-632ab5be2eef983d mx-auto mt-2 max-w-2xl text-sm md:text-base text-white/70">Available on multiple platforms for your convenience</p></div><div class="jsx-632ab5be2eef983d grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-4"><div class="jsx-632ab5be2eef983d to-animate relative rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur flex h-full flex-col text-center"><span class="jsx-632ab5be2eef983d absolute right-3 top-3 rounded-md bg-transparent px-2 py-1 text-xs uppercase tracking-[0.2em] text-white">Best</span><div class="jsx-632ab5be2eef983d mx-auto mb-4 flex
+h-20 w-20 items-center justify-center rounded-2xl bg-transparent flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hand-coins h-10 w-10"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17"></path><path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9"></path><path d="m2 16 6 6"></path><circle cx="16" cy="9" r="2.9"></circle><circle cx="6" cy="5" r="3"></circle></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg
+uppercase tracking-[0.1em] font-semibold">Android App</h3><p class="jsx-632ab5be2eef983d mb-4 text-sm text-white/70">Download our native Android application for the best mobile experience.</p><div class="jsx-632ab5be2eef983d mt-auto w-full
+space-y-3"><a target="_blank" data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 w-full rounded-lg bg-gradient-to-r from-cyan-600 to-violet-600 hover:from-cyan-500 hover:to-violet-500 text-white font-semibold transition-all shadow-lg hover:shadow-cyan-500/25" href="https://raw.githubusercontent.com/KEX001/VStore/master/APK/Vortexify.apk"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download mr-2 h-4 w-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15
+17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>Download APK</a></div><div class="jsx-632ab5be2eef983d mt-3 flex justify-center gap-4 text-xs text-white/70"><span class="jsx-632ab5be2eef983d">138 KB</span><span class="jsx-632ab5be2eef983d">v3+</span></div></div><div class="jsx-632ab5be2eef983d to-animate relative rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur flex h-full flex-col text-center"><span class="jsx-632ab5be2eef983d absolute right-3 top-3 rounded-md bg-transparent px-2 py-1 text-xs uppercase tracking-[0.2em]
+text-white">Popular</span><div class="jsx-632ab5be2eef983d mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-transparent flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wind h-10 w-10"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"></path><path d="M9.6 4.6A2 2 0 1 1 11 8H2"></path><path d="M12.6 19.4A2 2 0 1 0 14 16H2"></path></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg uppercase tracking-[0.1em] font-semibold">Windows App</h3><p class="jsx-632ab5be2eef983d mb-4 text-sm text-white/70">Use Vortex directly within your Windows 10-11.</p><a target="_blank" data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 mt-auto w-full rounded-lg border-white/15 bg-white/5 transition-all duration-300 text-sm" href="https://raw.githubusercontent.com/KEX001/VStore/master/ZIP/Vortex 3.0.zip"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download mr-2
+h-4 w-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg>Download ZIP</a><div class="jsx-632ab5be2eef983d mt-3 flex justify-center gap-4 text-xs text-white/70"><span class="jsx-632ab5be2eef983d">1.07 MB</span><span class="jsx-632ab5be2eef983d">v3+</span></div></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur flex h-full flex-col text-center"><div class="jsx-632ab5be2eef983d mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-transparent flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0
+0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe h-10 w-10"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg></div><h3 class="jsx-632ab5be2eef983d
+mb-2 text-lg uppercase tracking-[0.1em] font-semibold">Web App</h3><p class="jsx-632ab5be2eef983d mb-4 text-sm text-white/70">Access Vortex directly from your browser without installation.</p><div class="jsx-632ab5be2eef983d mt-auto w-full
+space-y-3"><a target="_blank" data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-primary hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 w-full rounded-lg bg-gradient-to-r from-cyan-600 to-violet-600 hover:from-cyan-500 hover:to-violet-500 text-white font-semibold transition-all shadow-lg hover:shadow-cyan-500/25" href="https://vortex.webs.vc"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link mr-2 h-4 w-4"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>Open App</a></div><div class="jsx-632ab5be2eef983d mt-3 flex justify-center gap-4 text-xs text-white/70"><span class="jsx-632ab5be2eef983d">Online</span><span class="jsx-632ab5be2eef983d">v3+</span></div></div><div class="jsx-632ab5be2eef983d to-animate relative rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur flex h-full flex-col text-center"><span class="jsx-632ab5be2eef983d absolute right-3 top-3 rounded-md bg-transparent px-2 py-1 text-xs uppercase tracking-[0.2em] text-white">Updating</span><div class="jsx-632ab5be2eef983d mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-transparent flex-shrink-0"><svg viewBox="0 0 24 24" fill="currentColor" class="jsx-632ab5be2eef983d h-10 w-10 text-white"><path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.597-.165 2.04l4.861 1.721 1.921 5.63c.271.945 1.571 1.428 2.487.896l2.13-1.353a.92.92 0 0 1 1.24.16l3.162 3.877c.529.649 1.623.465 1.922-.382l5.746-17.686c.528-1.571-.313-2.346-1.886-1.8z" class="jsx-632ab5be2eef983d"></path></svg></div><h3 class="jsx-632ab5be2eef983d mb-2 text-lg uppercase tracking-[0.1em] font-semibold">Telegram Mini App</h3><p class="jsx-632ab5be2eef983d mb-4 text-sm text-white/70">Experience Vortex through our Telegram bot&#x27;s mini app.</p><a target="_blank" data-slot="button" class="inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*=&#x27;size-&#x27;])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 has-[&gt;svg]:px-3 mt-auto w-full rounded-lg border-white/15 bg-white/5 transition-all duration-300 text-sm" href="https://t.me/StormMusicPlayer_bot?startapp=true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide
+lucide-external-link mr-2 h-4 w-4"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>Mini App</a><div class="jsx-632ab5be2eef983d mt-3 flex justify-center gap-4 text-xs text-white/70"><span class="jsx-632ab5be2eef983d">Online</span><span class="jsx-632ab5be2eef983d">v3+</span></div></div></div></div></section><section id="credits" class="jsx-632ab5be2eef983d relative z-10 py-16 md:py-24"><div class="jsx-632ab5be2eef983d container mx-auto max-w-6xl px-4"><div class="jsx-632ab5be2eef983d mb-10 md:mb-14 text-center"><span class="jsx-632ab5be2eef983d mb-3 md:mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 md:px-4 py-1 md:py-1.5 text-xs uppercase tracking-[0.2em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_8px_40px_rgba(0,0,0,0.35)]
+backdrop-blur">Built with Excellence</span><h2 class="jsx-632ab5be2eef983d mt-2
+md:mt-3 text-2xl md:text-3xl lg:text-4xl font-extrabold">Project Credits</h2><p
+class="jsx-632ab5be2eef983d mx-auto mt-2 max-w-2xl text-sm md:text-base text-white/70">Built with love.</p></div><div class="jsx-632ab5be2eef983d grid grid-cols-1 gap-4 md:gap-6 md:grid-cols-2 lg:grid-cols-3"><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur hover:bg-white/10 transition-all"><h3 class="jsx-632ab5be2eef983d text-lg font-semibold mb-2">Kunal</h3><p class="jsx-632ab5be2eef983d text-sm text-white/70 mb-4">Lead Developer</p><div class="jsx-632ab5be2eef983d flex gap-2"><a href="https://t.me/Synckex" target="_blank" rel="noreferrer" class="jsx-632ab5be2eef983d inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-xs font-medium">Telegram<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a><a href="https://www.instagram.com/kxunal._/" target="_blank" rel="noreferrer" class="jsx-632ab5be2eef983d inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-xs font-medium">Instagram<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a></div></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur hover:bg-white/10 transition-all"><h3 class="jsx-632ab5be2eef983d text-lg font-semibold mb-2">Prakhar</h3><p class="jsx-632ab5be2eef983d text-sm text-white/70 mb-4">Audio Engineer</p><div class="jsx-632ab5be2eef983d flex gap-2"><a
+href="https://t.me/Ifeelram " target="_blank" rel="noreferrer" class="jsx-632ab5be2eef983d inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-xs font-medium">Telegram<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a><a href="https://www.instagram.com/ifeelram/" target="_blank" rel="noreferrer" class="jsx-632ab5be2eef983d inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-xs
+font-medium">Instagram<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-external-link h-3 w-3"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a></div></div></div></div></section><section id="contact" class="jsx-632ab5be2eef983d relative
+z-10 py-16 md:py-24"><div class="jsx-632ab5be2eef983d container mx-auto max-w-6xl px-4"><div class="jsx-632ab5be2eef983d mb-10 md:mb-14 text-center"><span class="jsx-632ab5be2eef983d mb-3 md:mb-4 inline-flex items-center gap-2 rounded-full
+border border-white/15 bg-white/5 px-3 md:px-4 py-1 md:py-1.5 text-xs uppercase
+tracking-[0.2em] text-white shadow-[0_0_0_1px_rgba(255,255,255,0.04)_inset,0_8px_40px_rgba(0,0,0,0.35)] backdrop-blur">Get In Touch</span><h2 class="jsx-632ab5be2eef983d mt-2 md:mt-3 text-2xl md:text-3xl lg:text-4xl font-extrabold">Contact
+&amp; Social</h2><p class="jsx-632ab5be2eef983d mx-auto mt-2 max-w-2xl text-sm md:text-base text-white/70">Have questions or want to connect? Find us on our active platforms.</p></div><div class="jsx-632ab5be2eef983d grid grid-cols-1 gap-4
+md:gap-6 md:grid-cols-2 lg:grid-cols-3"><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur"><h3 class="jsx-632ab5be2eef983d text-lg font-semibold mb-2">Developer</h3><p class="jsx-632ab5be2eef983d text-sm text-white/70 mb-3">Reach out to the creator</p><a href="https://kex.live" target="_blank" rel="noreferrer" class="jsx-632ab5be2eef983d inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe w-4 h-4"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>Portfolio</a></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur"><h3 class="jsx-632ab5be2eef983d text-lg font-semibold mb-2">Support chat</h3><p class="jsx-632ab5be2eef983d text-sm text-white/70 mb-3">Join our support community</p><a href="https://t.me/STORM_CORE" target="_blank" rel="noreferrer" class="jsx-632ab5be2eef983d inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm"><svg viewBox="0 0 24 24" fill="currentColor" class="jsx-632ab5be2eef983d w-4 h-4"><path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16820563 C3.34915502,0.9111082 2.40734225,1.0182057 1.77946707,1.4894979 C0.994623095,2.1272231 0.837654326,3.04788957 1.15159189,3.99047389 L3.03521743,10.4314669 C3.03521743,10.5885643 3.34915502,10.7456617 3.50612381,10.7456617 L16.6915026,11.5311486 C16.6915026,11.5311486 17.1624089,11.5311486 17.1624089,12.0024408 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" class="jsx-632ab5be2eef983d"></path></svg>Join</a></div><div class="jsx-632ab5be2eef983d to-animate rounded-xl border border-white/15 bg-white/5 p-6 backdrop-blur"><h3 class="jsx-632ab5be2eef983d text-lg font-semibold mb-2">Updates Channel</h3><p class="jsx-632ab5be2eef983d text-sm text-white/70 mb-3">Get latest Vortex updates</p><a href="https://t.me/STORM_TECHH" target="_blank" rel="noreferrer" class="jsx-632ab5be2eef983d inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-sm"><svg
+viewBox="0 0 24 24" fill="currentColor" class="jsx-632ab5be2eef983d w-4 h-4"><path d="M16.6915026,12.4744748 L3.50612381,13.2599618 C3.19218622,13.2599618 3.03521743,13.4170592 3.03521743,13.5741566 L1.15159189,20.0151496 C0.8376543,20.8006365 0.99,21.89 1.77946707,22.52 C2.41,22.99 3.50612381,23.1 4.13399899,22.8429026 L21.714504,14.0454487 C22.6563168,13.5741566 23.1272231,12.6315722 22.9702544,11.6889879 L4.13399899,1.16820563 C3.34915502,0.9111082 2.40734225,1.0182057 1.77946707,1.4894979 C0.994623095,2.1272231 0.837654326,3.04788957 1.15159189,3.99047389 L3.03521743,10.4314669 C3.03521743,10.5885643 3.34915502,10.7456617 3.50612381,10.7456617 L16.6915026,11.5311486 C16.6915026,11.5311486 17.1624089,11.5311486 17.1624089,12.0024408 C17.1624089,12.4744748 16.6915026,12.4744748 16.6915026,12.4744748 Z" class="jsx-632ab5be2eef983d"></path></svg>Subscribe</a></div></div></div></section><footer class="jsx-632ab5be2eef983d relative z-10 border-t border-white/10 py-8 md:py-10 mt-16 md:mt-20"><div class="jsx-632ab5be2eef983d container mx-auto max-w-6xl px-4"><div class="jsx-632ab5be2eef983d flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8"><div class="jsx-632ab5be2eef983d"><div class="jsx-632ab5be2eef983d inline-flex items-center gap-2 mb-2"><span class="jsx-632ab5be2eef983d inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 flex-shrink-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-headphones h-3.5 w-3.5 md:h-4 md:w-4"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"></path></svg></span><h2 class="jsx-632ab5be2eef983d text-xl font-extrabold text-white">VORTEX</h2></div><p class="jsx-632ab5be2eef983d text-sm text-white/70">Elevate Your Music Experience</p></div><div class="jsx-632ab5be2eef983d flex gap-3"><a href="https://github.com/KEX001" target="_blank" rel="noreferrer" aria-label="github" class="jsx-632ab5be2eef983d inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/80 hover:bg-white/20 transition-colors"><svg viewBox="0 0 24 24" fill="currentColor" class="jsx-632ab5be2eef983d w-4 h-4"><path d="M12 .297c-6.63 0-12
+5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" class="jsx-632ab5be2eef983d"></path></svg></a><a href="https://t.me/ll_KEX_ll" target="_blank" rel="noreferrer" aria-label="telegram" class="jsx-632ab5be2eef983d inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white/80 hover:bg-white/20 transition-colors"><svg viewBox="0 0 24 24" fill="currentColor" class="jsx-632ab5be2eef983d w-4 h-4"><path d="M20.665 3.717l-17.73 6.837c-1.21.486-1.203 1.597-.165 2.04l4.861 1.721 1.921 5.63c.271.945 1.571 1.428 2.487.896l2.13-1.353a.92.92 0 0 1 1.24.16l3.162 3.877c.529.649 1.623.465 1.922-.382l5.746-17.686c.528-1.571-.313-2.346-1.886-1.8z" class="jsx-632ab5be2eef983d"></path></svg></a></div></div><div class="jsx-632ab5be2eef983d mt-6 md:mt-8 border-t border-white/10 pt-6"><div class="jsx-632ab5be2eef983d flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-xs md:text-sm text-white/70"><p class="jsx-632ab5be2eef983d">© 2025 Vortexify. All rights reserved.</p><div class="jsx-632ab5be2eef983d flex gap-4"><a href="https://policypage-six.vercel.app/" target="_blank" rel="noreferrer" class="jsx-632ab5be2eef983d hover:text-white transition-colors">Privacy Policy</a></div></div></div></div></footer></main></div></div><script src="/_next/static/chunks/webpack-0c954b06aeb5e756.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[1423,[],\"\"]\n3:I[9795,[],\"\"]\n4:I[1450,[],\"ClientPageRoot\"]\n5:I[8468,[\"18\",\"static/chunks/18-44c832a92f861b68.js\",\"974\",\"static/chunks/app/page-f4d364c6c8881dba.js\"],\"default\"]\n8:I[4205,[],\"OutletBoundary\"]\nb:I[4205,[],\"ViewportBoundary\"]\nd:I[4205,[],\"MetadataBoundary\"]\nf:I[250,[],\"\"]\n:HL[\"/_next/static/media/93f479601ee12b01-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/9cc5b37ab1350db7-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/de42cfb9a3b980ae-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/media/e6099e249fd938cc-s.p.woff2\",\"font\",{\"crossOrigin\":\"\",\"type\":\"font/woff2\"}]\n:HL[\"/_next/static/css/777afcd9c865b706.css\",\"style\"]\n:HL[\"/_next/static/css/a886cf98adcf49be.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"zv31oL0mNyOVIslWxGJ7X\",\"p\":\"\",\"c\":[\"\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"__PAGE__\",{}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/777afcd9c865b706.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}],[\"$\",\"link\",\"1\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/a886cf98adcf49be.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"children\":[[\"$\",\"head\",null,{\"children\":[[\"$\",\"meta\",null,{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes\"}],[\"$\",\"style\",null,{\"children\":\"\\nhtml {\\n  font-family: 'Figtree', 'Figtree Fallback';\\n  --font-sans: __variable_689e3f;\\n  --font-mono: __variable_9a8899;\\n  --font-instrument-serif: __variable_1f5468;\\n}\\n
+    \"}]]}],[\"$\",\"body\",null,{\"className\":\"__variable_689e3f __variable_9a8899 __variable_1f5468\",\"children\":[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]}]]}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"$L4\",null,{\"Component\":\"$5\",\"searchParams\":{},\"params\":{},\"promises\":[\"$@6\",\"$@7\"]}],\"$undefined\",null,[\"$\",\"$L8\",null,{\"children\":[\"$L9\",\"$La\",null]}]]}],{},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"sDToFtBlYET8dfu77KIF3\",{\"children\":[[\"$\",\"$Lb\",null,{\"children\":\"$Lc\"}],[\"$\",\"meta\",null,{\"name\":\"next-size-adjust\",\"content\":\"\"}]]}],[\"$\",\"$Ld\",null,{\"children\":\"$Le\"}]]}],false]],\"m\":\"$undefined\",\"G\":[\"$f\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"6:{}\n7:{}\n"])</script><script>self.__next_f.push([1,"c:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\n9:null\n"])</script><script>self.__next_f.push([1,"a:null\ne:[[\"$\",\"title\",\"0\",{\"children\":\"Vortex - Premium Music Experience\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Elevate your music journey with Vortex\"}]]\n"])</script></body></html>
