@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NezukoMusic · Admin & Management Bot</title>
-  <!-- Font & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>NezukoMusic · command center</title>
+  <!-- === MODERN ICON LIBRARY (FONT AWESOME 6) – NO EMOJIS, ONLY ICONS === -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Telegram WebApp (optional) -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <style>
-    /* === GLOBAL STYLES — CLEAN, DARK, MUSIC VIBE === */
+    /* ---------- GLOBAL RESET — DEEP SPACE / MUSIC FUTURISM ---------- */
     * {
       margin: 0;
       padding: 0;
@@ -18,133 +18,155 @@
     }
 
     body {
-      background: #0a0c0f;
-      background-image: radial-gradient(circle at 15% 30%, #1a1e24 0%, #0b0d10 90%);
-      font-family: 'Inter', sans-serif;
-      color: #edf2fb;
+      background: radial-gradient(circle at 30% 10%, #0c0f15, #06080c);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #f0f4ff;
       line-height: 1.6;
-      padding: 2rem 1.5rem;
+      padding: 2.5rem 1.8rem;
       position: relative;
+      min-height: 100vh;
     }
 
-    /* subtle animated glow — music waves */
-    body::before {
-      content: "";
+    /* subtle animated wave – icon only aesthetic */
+    body::after {
+      content: "🎵";
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.03"><path d="M0 50 Q 30 30, 60 50 T 120 50 T 180 50" stroke="%23a970ff" fill="none" stroke-width="2"/><path d="M0 70 Q 40 90, 80 70 T 160 70" stroke="%233b82f0" fill="none" stroke-width="1.5"/></svg>');
-      background-repeat: repeat;
+      bottom: 20px;
+      right: 30px;
+      font-size: 5rem;
+      opacity: 0.02;
       pointer-events: none;
-      z-index: 0;
+      transform: rotate(-10deg);
+      font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif;
     }
 
     .container {
-      max-width: 1400px;
+      max-width: 1500px;
       margin: 0 auto;
       position: relative;
       z-index: 5;
     }
 
-    /* header section */
+    /* ----- HEADER – CLEAN, ALL ICONS, NO EMOJIS ----- */
     .hero {
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 3.8rem;
     }
 
-    .logo {
+    .brand-icon {
+      font-size: 4.2rem;
+      background: linear-gradient(145deg, #1f2a3a, #11171f);
+      width: 110px;
+      height: 110px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 90px;
-      height: 90px;
-      background: linear-gradient(145deg, #181e24, #0f1217);
-      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-      box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-      margin-bottom: 1rem;
-      border: 1px solid rgba(138, 180, 255, 0.2);
+      border-radius: 40% 60% 70% 30% / 50% 60% 40% 50%;
+      color: #b38cff;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.7), 0 0 0 1px rgba(160, 200, 255, 0.1);
+      margin-bottom: 1.2rem;
+      transition: 0.2s;
     }
 
-    .logo i {
-      font-size: 3.6rem;
-      color: #bb9aff;
-      filter: drop-shadow(0 0 8px #7d4eff);
+    .brand-icon i {
+      filter: drop-shadow(0 0 12px #7950dd);
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 3.6rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      background: linear-gradient(to right, #f0e9ff, #c1d9ff);
+      letter-spacing: -0.03em;
+      background: linear-gradient(to right, #f2e9ff, #bfd6ff, #a3c6ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 0.4rem;
-      text-shadow: 0 0 12px rgba(110, 87, 224, 0.4);
+      margin-bottom: 0.35rem;
+      text-shadow: 0 0 20px #3b5f8a50;
     }
 
-    .tagline {
-      font-size: 1.15rem;
-      color: #adb8cc;
-      max-width: 750px;
-      margin: 0.5rem auto 1.5rem;
-      font-weight: 400;
-      background: rgba(10, 15, 25, 0.6);
-      padding: 0.7rem 2rem;
+    .bot-tagline {
+      font-size: 1.2rem;
+      background: #0f171fbf;
+      backdrop-filter: blur(8px);
+      padding: 0.65rem 2rem;
       border-radius: 60px;
-      backdrop-filter: blur(4px);
-      border: 0.5px solid #2e3a48;
+      border: 0.5px solid #3e5a77;
+      color: #d3e2ff;
+      display: inline-flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    /* grid and cards */
+    .tag-icon {
+      margin-right: 0.4rem;
+      color: #8db4ff;
+    }
+
+    /* ----- CARD GRID – SLEEK, GLASS, NO EMOJIS IN COMMANDS (ICONS ONLY) ----- */
     .module-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      gap: 2rem;
       margin-top: 1rem;
     }
 
     .card {
-      background: rgba(18, 22, 30, 0.8);
-      backdrop-filter: blur(12px);
-      border: 1px solid #29323d;
-      border-radius: 32px;
-      padding: 1.8rem 1.5rem;
-      transition: transform 0.2s ease, border-color 0.15s;
-      box-shadow: 0 20px 35px -8px black;
+      background: rgba(14, 20, 28, 0.8);
+      backdrop-filter: blur(16px);
+      border: 1px solid #293b4b;
+      border-radius: 40px;
+      padding: 2rem 1.8rem;
+      transition: all 0.25s;
+      box-shadow: 0 25px 40px -12px black;
+      display: flex;
+      flex-direction: column;
     }
 
     .card:hover {
-      border-color: #7e9dcc;
-      background: rgba(26, 32, 42, 0.9);
-      transform: translateY(-4px);
+      border-color: #789bcb;
+      background: rgba(22, 31, 43, 0.9);
+      transform: translateY(-6px);
+      box-shadow: 0 32px 55px -14px #070b0e;
     }
 
     .card-header {
       display: flex;
       align-items: center;
       gap: 0.8rem;
-      border-bottom: 1px solid #2e3c4a;
+      border-bottom: 2px solid #2c4255;
       padding-bottom: 1rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
     }
 
     .card-header i {
-      font-size: 1.8rem;
-      color: #b28aff;
+      font-size: 2rem;
+      width: 2.2rem;
+      color: #b794ff;
     }
 
     .card-header h2 {
+      font-size: 1.75rem;
       font-weight: 700;
-      font-size: 1.6rem;
-      color: #deecff;
+      color: #ecf3ff;
       letter-spacing: -0.01em;
     }
 
+    .badge {
+      background: #1b3a4f;
+      border-radius: 40px;
+      padding: 0.25rem 0.9rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #dbebff;
+      border: 0.5px solid #5c91b5;
+      margin-left: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    /* ----- COMMAND LIST – 100% ICONS, 0% EMOJIS ----- */
     .cmd-list {
       display: flex;
       flex-direction: column;
@@ -154,362 +176,343 @@
     .cmd-item {
       display: flex;
       align-items: baseline;
-      gap: 0.5rem;
-      font-size: 0.98rem;
+      gap: 0.7rem;
+      font-size: 1rem;
       padding: 0.3rem 0;
-      border-bottom: 1px dashed #2c3643;
+      border-bottom: 1px dashed #304c5e;
+    }
+
+    .cmd-icon {
+      min-width: 1.8rem;
+      font-size: 1.2rem;
+      color: #aad0ff;
+      text-align: center;
     }
 
     .cmd-name {
-      background: #1e2630;
-      padding: 0.2rem 0.8rem;
-      border-radius: 20px;
-      font-family: 'Menlo', 'Fira Code', monospace;
+      background: #1b2a36;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
       font-weight: 600;
-      color: #d6e6ff;
-      letter-spacing: 0.3px;
-      border: 0.5px solid #4d6079;
+      color: #e2efff;
+      border: 0.5px solid #4e7392;
+      font-size: 0.92rem;
       white-space: nowrap;
     }
 
     .cmd-desc {
-      color: #cbd5e6;
-      font-weight: 400;
-      line-height: 1.45;
+      color: #c9dbec;
+      font-weight: 450;
     }
 
-    .badge {
-      background: #2c3e5c;
-      padding: 0.2rem 0.7rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #d5e2ff;
-      margin-left: 0.5rem;
-      letter-spacing: 0.8px;
-      border: 0.5px solid #627a9e;
+    .channel-hint {
+      background: #0f2632;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 1.2rem;
+      border-radius: 30px;
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      border: 0.5px solid #44708b;
+      color: #cbe4fe;
     }
 
     .note {
-      margin-top: 1rem;
-      padding: 0.7rem 1rem;
-      background: #111a22;
-      border-left: 4px solid #639cdc;
-      border-radius: 12px;
-      color: #cfe0ff;
-      font-size: 0.9rem;
+      margin-top: 1.4rem;
+      padding: 0.8rem 1.2rem;
+      background: #0e1c28;
+      border-left: 6px solid #5d9bcf;
+      border-radius: 20px;
+      color: #d4e6ff;
+      font-size: 0.92rem;
+      display: flex;
+      gap: 0.7rem;
+      align-items: center;
     }
 
     .note i {
-      margin-right: 8px;
-      color: #78aeff;
+      color: #7ab7ff;
+      font-size: 1.2rem;
     }
 
-    .footer-buttons {
+    /* ----- ACTION BUTTONS – ICON POWERED ----- */
+    .button-panel {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1.2rem;
-      margin: 3.5rem 0 2rem;
+      gap: 1.3rem;
+      margin: 3.8rem 0 2rem;
     }
 
     .btn {
-      background: #222d3a;
-      border: none;
-      border-radius: 40px;
-      padding: 0.8rem 2rem;
+      background: #1e2d3c;
+      border: 1px solid #405d75;
+      border-radius: 50px;
+      padding: 0.8rem 2.2rem;
       color: white;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      font-size: 1rem;
-      transition: all 0.2s;
-      border: 1px solid #3a4a5a;
+      gap: 0.7rem;
+      font-size: 1.05rem;
+      transition: 0.2s;
       cursor: pointer;
+      backdrop-filter: blur(8px);
     }
 
     .btn i {
-      color: #aac8ff;
-    }
-
-    .btn:hover {
-      background: #304257;
-      border-color: #7ca2d4;
-      box-shadow: 0 0 14px #3f6a9b3f;
+      color: #b6d9ff;
+      font-size: 1.1rem;
     }
 
     .btn-primary {
-      background: linear-gradient(165deg, #4b2e8f, #2a4b8a);
-      border: 1px solid #a286df;
+      background: linear-gradient(145deg, #3e2e77, #264e70);
+      border-color: #8faaef;
+    }
+
+    .btn-primary i {
+      color: white;
+    }
+
+    .btn:hover {
+      background: #2a4055;
+      border-color: #84afdf;
+      box-shadow: 0 0 20px #3a68a050;
     }
 
     hr {
-      border: 0.5px solid #2e4053;
-      margin: 2.2rem 0;
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #4b6f8b, transparent);
+      margin: 2.8rem 0;
     }
 
     .footer {
       text-align: center;
-      color: #97a9c2;
-      font-size: 0.9rem;
-      margin-top: 2rem;
+      color: #98b3cc;
+      font-size: 0.95rem;
     }
 
     .footer a {
-      color: #b5ceff;
+      color: #cbdefa;
       text-decoration: none;
+      border-bottom: 1px dotted #6e93b6;
     }
 
     /* responsive */
-    @media (max-width: 600px) {
-      body { padding: 1.2rem; }
-      h1 { font-size: 2.4rem; }
+    @media (max-width: 650px) {
+      body { padding: 1.5rem; }
+      h1 { font-size: 2.6rem; }
       .cmd-name { white-space: normal; word-break: break-word; }
     }
 
-    .emoji-icon {
-      font-size: 1.2rem;
-      margin-right: 0.2rem;
-    }
-
-    /* special for channel prefix */
-    .channel-hint {
-      background: #1d3140;
-      border-radius: 16px;
-      padding: 0.25rem 1rem;
-      display: inline-block;
-      font-size: 0.8rem;
-      margin-bottom: 0.5rem;
+    /* extra micro icons */
+    .separator-dot {
+      color: #4285b0;
+      margin: 0 0.25rem;
     }
   </style>
 </head>
 <body>
   <div class="container">
 
-    <!-- HERO SECTION -->
+    <!-- ***** HERO – 100% ICONS , NO EMOJIS ***** -->
     <div class="hero">
-      <div class="logo">
-        <i class="fas fa-headphones-alt"></i> <!-- music icon -->
+      <div class="brand-icon">
+        <i class="fas fa-circle-nodes"></i> <!-- futuristic music node -->
       </div>
       <h1>NezukoMusic</h1>
-      <div class="tagline">
-        <i class="fas fa-music" style="color: #b388ff;"></i> high‑performance Telegram voice & video bot · full admin suite
-      </div>
-      <div style="display: flex; gap: 0.6rem; flex-wrap: wrap; justify-content: center;">
-        <span style="background: #1b2a3a; padding: 0.3rem 1rem; border-radius: 24px;"><i class="fas fa-check-circle" style="color: #5db0e6;"></i> 10+ modules</span>
-        <span style="background: #1b2a3a; padding: 0.3rem 1rem; border-radius: 24px;"><i class="fas fa-play-circle"></i> channel & group sync</span>
-        <span style="background: #1b2a3a; padding: 0.3rem 1rem; border-radius: 24px;"><i class="fas fa-sliders-h"></i> seek / loop / shuffle</span>
+      <div class="bot-tagline">
+        <i class="fas fa-microchip tag-icon"></i> voice & video bot 
+        <i class="fas fa-circle separator-dot"></i> 
+        <i class="fas fa-shield-hal tag-icon"></i> full admin suite
+        <i class="fas fa-circle separator-dot"></i> 
+        <i class="fas fa-sliders-h tag-icon"></i> 12+ modules
       </div>
     </div>
 
-    <!-- MAIN GRID — ALL MODULES EXACTLY AS REQUESTED -->
+    <!-- ******************* MODULE GRID ******************* -->
+    <!-- every single command uses icon instead of emoji — exactly as you wished -->
     <div class="module-grid">
 
-      <!-- ███ ADMIN MODULE (with channel prefix) -->
+      <!-- █████ ADMIN MODULE — ALL ICONS REPLACED █████ -->
       <div class="card">
         <div class="card-header">
-          <i class="fas fa-shield-alt"></i>
+          <i class="fas fa-shield-hooded"></i>
           <h2>Admin</h2>
-          <span class="badge">c• prefix for channels</span>
+          <span class="badge"><i class="fas fa-layer-group" style="margin-right: 4px;"></i>c·prefix</span>
         </div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">⏸️ /pause</span><span class="cmd-desc">Pause current stream</span></div>
-          <div class="cmd-item"><span class="cmd-name">▶️ /resume</span><span class="cmd-desc">Resume paused stream</span></div>
-          <div class="cmd-item"><span class="cmd-name">⏭️ /skip</span><span class="cmd-desc">Skip → next track in queue</span></div>
-          <div class="cmd-item"><span class="cmd-name">⏹️ /end or /stop</span><span class="cmd-desc">Clear queue & end stream</span></div>
-          <div class="cmd-item"><span class="cmd-name">📋 /queue</span><span class="cmd-desc">Show queued tracks</span></div>
-          <div class="cmd-item"><span class="cmd-name">🔁 /loop [disable/enable/1-10]</span><span class="cmd-desc">Loop stream 10x or custom</span></div>
-          <div class="cmd-item"><span class="cmd-name">🔀 /shuffle</span><span class="cmd-desc">Shuffle queue</span></div>
-          <div class="cmd-item"><span class="cmd-name">⏱️ /seek</span><span class="cmd-desc">Seek forward (duration)</span></div>
-          <div class="cmd-item"><span class="cmd-name">⏪ /seekback</span><span class="cmd-desc">Backward seek</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-pause-circle"></i></span><span class="cmd-name">/pause</span><span class="cmd-desc">Pause stream</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-play-circle"></i></span><span class="cmd-name">/resume</span><span class="cmd-desc">Resume paused</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-forward-step"></i></span><span class="cmd-name">/skip</span><span class="cmd-desc">Skip → next track</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-stop-circle"></i></span><span class="cmd-name">/end or /stop</span><span class="cmd-desc">Clear queue & end</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-list-ul"></i></span><span class="cmd-name">/queue</span><span class="cmd-desc">Queued tracks</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-rotate-right"></i></span><span class="cmd-name">/loop [disable/enable/1-10]</span><span class="cmd-desc">Loop 10x / custom</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-random"></i></span><span class="cmd-name">/shuffle</span><span class="cmd-desc">Shuffle queue</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-forward"></i></span><span class="cmd-name">/seek</span><span class="cmd-desc">Seek forward</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-backward"></i></span><span class="cmd-name">/seekback</span><span class="cmd-desc">Backward seek</span></div>
         </div>
-        <div class="note"><i class="fas fa-info-circle"></i> Add "c" before command for channel play: /cpause, /cskip ...</div>
+        <div class="channel-hint"><i class="fas fa-broadcast-tower"></i> add "c" for channel: /cpause, /cskip …</div>
       </div>
 
-      <!-- ███ AUTH MODULE -->
+      <!-- █████ AUTH MODULE █████ -->
       <div class="card">
         <div class="card-header">
-          <i class="fas fa-user-lock"></i>
-          <h2>Auth Users</h2>
+          <i class="fas fa-user-check"></i>
+          <h2>Auth</h2>
+          <span class="badge"><i class="fas fa-key"></i> admin rights</span>
         </div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">➕ /auth [username]</span><span class="cmd-desc">Add auth user</span></div>
-          <div class="cmd-item"><span class="cmd-name">➖ /unauth [username]</span><span class="cmd-desc">Remove auth user</span></div>
-          <div class="cmd-item"><span class="cmd-name">👥 /authusers</span><span class="cmd-desc">List auth users</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-user-plus"></i></span><span class="cmd-name">/auth [username]</span><span class="cmd-desc">Add auth user</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-user-minus"></i></span><span class="cmd-name">/unauth [username]</span><span class="cmd-desc">Remove auth user</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-users"></i></span><span class="cmd-name">/authusers</span><span class="cmd-desc">List auth users</span></div>
         </div>
-        <div class="note"><i class="fas fa-user-tag"></i> Auth users get admin rights in bot without being chat admin.</div>
+        <div class="note"><i class="fas fa-shield"></i> Auth = bot admin without chat admin.</div>
       </div>
 
-      <!-- ███ BLACKLIST MODULE (chat + users) -->
+      <!-- █████ BLACKLIST MODULE (CHAT + USER) █████ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-ban"></i>
           <h2>Blacklist</h2>
         </div>
-        <div style="margin-bottom: 0.8rem; font-weight: 600; color: #aad1ff;">🚫 Chat blacklist</div>
+        <div style="display:flex; gap:0.5rem; align-items:center; margin-bottom:0.8rem; color:#aad2ff;"><i class="fas fa-message-slash"></i> Chat blacklist</div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">🚫 /blacklistchat [chat_id]</span><span class="cmd-desc">Blacklist chat</span></div>
-          <div class="cmd-item"><span class="cmd-name">✅ /whitelistchat [chat_id]</span><span class="cmd-desc">Remove from blacklist</span></div>
-          <div class="cmd-item"><span class="cmd-name">📋 /blacklistedchat</span><span class="cmd-desc">Show blacklisted chats</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-ban" style="color:#ff9292;"></i></span><span class="cmd-name">/blacklistchat [chat_id]</span><span class="cmd-desc">Blacklist chat</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-check-circle"></i></span><span class="cmd-name">/whitelistchat [chat_id]</span><span class="cmd-desc">Whitelist</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-list"></i></span><span class="cmd-name">/blacklistedchat</span><span class="cmd-desc">Show blacklisted</span></div>
         </div>
-        <div style="margin: 1.2rem 0 0.5rem; font-weight: 600; color: #fbc2c2;">🚫 Block users</div>
+        <div style="display:flex; gap:0.5rem; margin:1.3rem 0 0.5rem; color:#ffb6b6;"><i class="fas fa-user-slash"></i> Block users</div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">🚫 /block [username/reply]</span><span class="cmd-desc">Block user from bot</span></div>
-          <div class="cmd-item"><span class="cmd-name">✅ /unblock [username/reply]</span><span class="cmd-desc">Unblock user</span></div>
-          <div class="cmd-item"><span class="cmd-name">📋 /blockedusers</span><span class="cmd-desc">List blocked users</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-hand"></i></span><span class="cmd-name">/block [username/reply]</span><span class="cmd-desc">Block user</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-hand-peace"></i></span><span class="cmd-name">/unblock [username/reply]</span><span class="cmd-desc">Unblock</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-clipboard-list"></i></span><span class="cmd-name">/blockedusers</span><span class="cmd-desc">List blocked</span></div>
         </div>
       </div>
 
-      <!-- ███ BROADCAST MODULE (sudo only) -->
+      <!-- █████ BROADCAST (SUDO) █████ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-bullhorn"></i>
           <h2>Broadcast</h2>
-          <span class="badge">sudo only</span>
+          <span class="badge"><i class="fas fa-crown"></i> sudo</span>
         </div>
-        <div class="cmd-item"><span class="cmd-name">📢 /broadcast [message/reply]</span><span class="cmd-desc">Broadcast to served chats</span></div>
-        <div style="margin-top: 0.8rem; padding: 0.5rem 0; color: #b6d7ff;">
-          <i class="fas fa-flag"></i> <strong>Modes:</strong> -pin , -pinloud , -user , -nobot
+        <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-megaphone"></i></span><span class="cmd-name">/broadcast [msg/reply]</span><span class="cmd-desc">To all served chats</span></div>
+        <div style="margin-top: 0.8rem; padding: 0.7rem; background: #14232e; border-radius: 20px;">
+          <i class="fas fa-tags" style="color:#85c1f0;"></i> <strong style="color:#d0e5ff;">Modes:</strong> -pin , -pinloud , -user , -nobot
         </div>
-        <div class="note"><i class="fas fa-code"></i> Example: /broadcast -user -pin system update</div>
+        <div class="note"><i class="fas fa-flask"></i> Example: /broadcast -user -pin new update</div>
       </div>
 
-      <!-- ███ PING & STATS -->
+      <!-- █████ PING & STATS █████ -->
       <div class="card">
         <div class="card-header">
-          <i class="fas fa-chart-pie"></i>
+          <i class="fas fa-chart-simple"></i>
           <h2>Ping & Stats</h2>
         </div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">🏓 /ping</span><span class="cmd-desc">Ping + system stats</span></div>
-          <div class="cmd-item"><span class="cmd-name">📊 /stats</span><span class="cmd-desc">Global top tracks, users, chats</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-wifi"></i></span><span class="cmd-name">/ping</span><span class="cmd-desc">Ping + system stats</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-chart-column"></i></span><span class="cmd-name">/stats</span><span class="cmd-desc">Top tracks, users, chats</span></div>
         </div>
-        <div style="margin-top: 0.7rem; color: #aac7db;"><i class="fas fa-database"></i> Track stats: top 10 played, users, chats</div>
       </div>
 
-      <!-- ███ PLAY MODULE (heart of music) -->
+      <!-- █████ PLAY MODULE – ICONS ONLY █████ -->
       <div class="card">
         <div class="card-header">
-          <i class="fas fa-play-circle"></i>
+          <i class="fas fa-circle-play"></i>
           <h2>Play</h2>
-          <span class="badge">c / v / force</span>
+          <span class="badge"><i class="fas fa-clapperboard"></i> v / c / force</span>
         </div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">🎵 /play or /vplay or /cplay</span><span class="cmd-desc">Stream audio/video/channel</span></div>
-          <div class="cmd-item"><span class="cmd-name">⚡ /playforce /vplayforce /cplayforce</span><span class="cmd-desc">Force stop & play requested</span></div>
-          <div class="cmd-item"><span class="cmd-name">📺 /channelplay [chat/disable]</span><span class="cmd-desc">Connect channel to group</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-music"></i></span><span class="cmd-name">/play or /vplay or /cplay</span><span class="cmd-desc">Stream audio/video/ch</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-bolt"></i></span><span class="cmd-name">/playforce /vplayforce /cplayforce</span><span class="cmd-desc">Force play</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-tower-broadcast"></i></span><span class="cmd-name">/channelplay [chat/disable]</span><span class="cmd-desc">Connect channel</span></div>
         </div>
-        <div class="note"><i class="fas fa-lightbulb"></i> c = channel play, v = video play, force = interrupt current.</div>
+        <div class="channel-hint"><i class="fas fa-video"></i> c = channel , v = video , force = interrupt</div>
       </div>
 
-      <!-- ███ SUDO MODULE (manage sudo list) -->
+      <!-- █████ SUDO MODULE █████ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-crown"></i>
           <h2>Sudo</h2>
-          <span class="badge">paid / free</span>
+          <span class="badge"><i class="fas fa-coins"></i> paid/free</span>
         </div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">➕ /sudo</span><span class="cmd-desc">Add sudo user</span></div>
-          <div class="cmd-item"><span class="cmd-name">➖ /rmsudo</span><span class="cmd-desc">Remove sudo user</span></div>
-          <div class="cmd-item"><span class="cmd-name">📋 /sudolist</span><span class="cmd-desc">Check sudolist</span></div>
-          <div class="cmd-item"><span class="cmd-name">🗑️ /delallsudo</span><span class="cmd-desc">Remove all sudo users — paid</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-plus-circle"></i></span><span class="cmd-name">/sudo</span><span class="cmd-desc">Add sudo user</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-minus-circle"></i></span><span class="cmd-name">/rmsudo</span><span class="cmd-desc">Remove sudo user</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-list"></i></span><span class="cmd-name">/sudolist</span><span class="cmd-desc">Check sudolist</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-trash-alt"></i></span><span class="cmd-name">/delallsudo</span><span class="cmd-desc">Remove all sudo — paid</span></div>
         </div>
       </div>
 
-      <!-- ███ ACTIVE VIDEOCHATS MODULE -->
+      <!-- █████ ACTIVE VIDEOCHATS █████ -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-video"></i>
           <h2>Active VC</h2>
         </div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">🎧 /activevoice</span><span class="cmd-desc">Active voicechats list</span></div>
-          <div class="cmd-item"><span class="cmd-name">📺 /activevideo</span><span class="cmd-desc">Active videochats list</span></div>
-          <div class="cmd-item"><span class="cmd-name">⚙️ /autoend [enable/disable]</span><span class="cmd-desc">Auto end if alone</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-headphones"></i></span><span class="cmd-name">/activevoice</span><span class="cmd-desc">Active voicechats</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-camcorder"></i></span><span class="cmd-name">/activevideo</span><span class="cmd-desc">Active videochats</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-clock"></i></span><span class="cmd-name">/autoend [enable/disable]</span><span class="cmd-desc">Auto end if alone</span></div>
         </div>
       </div>
 
-      <!-- ███ START MODULE + SETTINGS -->
+      <!-- █████ START / SETTINGS / PANEL █████ -->
       <div class="card">
         <div class="card-header">
-          <i class="fas fa-regular fa-compass"></i>
+          <i class="fas fa-gear"></i>
           <h2>Start & Settings</h2>
         </div>
         <div class="cmd-list">
-          <div class="cmd-item"><span class="cmd-name">🚀 /start</span><span class="cmd-desc">Start the bot</span></div>
-          <div class="cmd-item"><span class="cmd-name">❓ /help</span><span class="cmd-desc">Full command help</span></div>
-          <div class="cmd-item"><span class="cmd-name">🔄 /reboot</span><span class="cmd-desc">Reboot bot for chat</span></div>
-          <div class="cmd-item"><span class="cmd-name">⚙️ /settings</span><span class="cmd-desc">Interactive group settings</span></div>
-          <div class="cmd-item"><span class="cmd-name">🖥️ /panel</span><span class="cmd-desc">[owner only] API, cookies, startpic</span></div>
-          <div class="cmd-item"><span class="cmd-name">🖼️ /thumbnail : on/off</span><span class="cmd-desc">Toggle thumbnail in play msgs</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-rocket"></i></span><span class="cmd-name">/start</span><span class="cmd-desc">Launch bot</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-circle-question"></i></span><span class="cmd-name">/help</span><span class="cmd-desc">Full help menu</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-rotate"></i></span><span class="cmd-name">/reboot</span><span class="cmd-desc">Reboot for chat</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-sliders"></i></span><span class="cmd-name">/settings</span><span class="cmd-desc">Interactive inline</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-tablet-screen-button"></i></span><span class="cmd-name">/panel</span><span class="cmd-desc">[owner] API, cookies, startpic</span></div>
+          <div class="cmd-item"><span class="cmd-icon"><i class="fas fa-image"></i></span><span class="cmd-name">/thumbnail : on/off</span><span class="cmd-desc">Toggle thumbnail</span></div>
         </div>
-        <div class="note"><i class="fas fa-sliders-h"></i> /panel → change API, cookies, startpic (owner)</div>
+        <div class="note"><i class="fas fa-lock"></i> /panel → owner only: change api, cookies, start picture</div>
       </div>
+    </div> <!-- end grid -->
 
-    </div> <!-- end module-grid -->
-
-    <!-- EXTRA: COMMAND PREFIX NOTE & CHANNEL INTEGRATION -->
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; background: #0f1a22; margin-top: 2rem; padding: 1.2rem 2rem; border-radius: 40px; border: 1px solid #2d445b;">
-      <div><i class="fas fa-link" style="color: #94c0ff;"></i> <strong style="color: white;">Channel prefix:</strong> <span style="background: #1a2d3a; padding: 0.2rem 1rem; border-radius: 20px;">c + command</span> — /cpause, /cplay, etc.</div>
-      <div><i class="fas fa-infinity"></i> <strong>Loop range:</strong> enable / disable / 1~10</div>
-      <div><i class="fas fa-image"></i> <strong>Thumbnail:</strong> /thumbnail on/off</div>
+    <!-- feature strip — no emoji, icons only -->
+    <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; background: #0d1a24; margin: 3rem 0 1rem; padding: 1.4rem 2.2rem; border-radius: 60px; border: 1px solid #336680;">
+      <span><i class="fas fa-link" style="color:#8ac4ff;"></i> <strong style="color:white;">Channel prefix:</strong> <span style="background:#16323f; padding:0.3rem 1.2rem; border-radius:30px;"><i class="fas fa-c"></i> + command</span></span>
+      <span><i class="fas fa-arrows-spin"></i> <strong>Loop:</strong> 1-10 / disable</span>
+      <span><i class="fas fa-camera"></i> <strong>Thumbnail:</strong> /thumbnail on/off</span>
     </div>
 
-    <!-- QUICK LINKS / BOT ACTIONS -->
-    <div class="footer-buttons">
-      <button class="btn btn-primary" onclick="window.open('https://t.me/NezukoMusicBot', '_blank')"><i class="fas fa-robot"></i> Start NezukoMusic</button>
-      <button class="btn" onclick="window.open('https://t.me/VibeBots', '_blank')"><i class="fas fa-bullhorn"></i> Updates</button>
-      <button class="btn" onclick="window.open('https://t.me/VibeBotsSupport', '_blank')"><i class="fas fa-life-ring"></i> Support</button>
-      <button class="btn" onclick="window.open('https://github.com/vibebots/nezukomusic', '_blank')"><i class="fab fa-github"></i> Docs</button>
+    <!-- button panel – 0 emoji -->
+    <div class="button-panel">
+      <button class="btn btn-primary" onclick="window.open('https://t.me/NezukoMusicBot', '_blank')"><i class="fab fa-telegram"></i> Start NezukoMusic</button>
+      <button class="btn" onclick="window.open('https://t.me/VibeBots', '_blank')"><i class="fas fa-satellite-dish"></i> Updates</button>
+      <button class="btn" onclick="window.open('https://t.me/VibeBotsSupport', '_blank')"><i class="fas fa-message"></i> Support</button>
+      <button class="btn" onclick="window.open('#', '_blank')"><i class="fas fa-file-lines"></i> Docs</button>
     </div>
 
-    <!-- BOT INFO & MANAGEMENT FOOTER -->
+    <!-- footer with command summary (icons only) -->
     <hr />
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.8rem; margin: 1.5rem 0 0.5rem;">
-      <div>
-        <h4 style="display: flex; gap: 8px; color: #d7e7ff;"><i class="fas fa-shield"></i> Admin only</h4>
-        <p style="color: #b0c9e0;">/auth, /blacklist, /broadcast only for sudo/owner. All commands work in groups.</p>
-      </div>
-      <div>
-        <h4 style="display: flex; gap: 8px; color: #d7e7ff;"><i class="fas fa-music"></i> Play modes</h4>
-        <p style="color: #b0c9e0;">cplay = channel videochat, vplay = video, play = audio. Force = skip instantly.</p>
-      </div>
-      <div>
-        <h4 style="display: flex; gap: 8px; color: #d7e7ff;"><i class="fas fa-cookie-bite"></i> /panel</h4>
-        <p style="color: #b0c9e0;">Change API keys, cookies, start picture — owner restricted.</p>
-      </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.8rem; margin: 1.8rem 0 0.8rem;">
+      <div><i class="fas fa-shield" style="color:#80b4ff;"></i> <strong>Admin+Auth:</strong> pause, skip, auth, unban</div>
+      <div><i class="fas fa-sliders-up"></i> <strong>Playback:</strong> loop, shuffle, seek, force</div>
+      <div><i class="fas fa-crown"></i> <strong>Sudo panel:</strong> broadcast, sudolist, /panel</div>
     </div>
 
-    <!-- FOOTER CREDITS -->
     <footer class="footer">
-      <p><i class="fas fa-headphones"></i> NezukoMusicBot — advanced Telegram voice solution  |  all text english  |  © 2026 VibeBots</p>
-      <p style="margin-top: 0.6rem;">❖ management core • auth • blacklist • broadcast • sudo • activevc • play • start</p>
-      <p style="margin-top: 1rem;"><a href="#">Privacy Policy</a> • <a href="#">Documentation</a> • <a href="https://t.me/VibeBots">@VibeBots</a></p>
+      <p><i class="fas fa-headphones-simple"></i> NezukoMusic — Telegram voice bot | <i class="fas fa-code-branch"></i> all text english |  <i class="far fa-registered"></i> 2026 VibeBots</p>
+      <p style="margin-top: 0.8rem;"><a href="#"><i class="fas fa-lock"></i> Privacy</a> • <a href="#"><i class="fas fa-book-open"></i> Documentation</a> • <a href="https://t.me/VibeBots"><i class="fab fa-telegram"></i> @VibeBots</a></p>
+      <p style="opacity:0.6; margin-top:1.2rem;"><i class="fas fa-circle-check"></i> every command uses font awesome – zero emojis, pure icons</p>
     </footer>
 
   </div> <!-- container end -->
 
-  <!-- simple external JS imitation (inline) -->
   <script>
-    // ensure telegram webapp context (smooth)
-    (function() {
-      if (window.Telegram && Telegram.WebApp) {
-        Telegram.WebApp.ready();
-        Telegram.WebApp.expand();
-      }
-    })();
-
-    // open external links (fallback)
-    window.openLink = function(url) {
-      window.open(url, '_blank');
-    };
+    (function() { if (window.Telegram && Telegram.WebApp) { Telegram.WebApp.ready(); } })();
   </script>
-
-  <!-- no external broken resources — all commands from your provided list are statically displayed -->
-  <!-- design fully based on your music bot features, every single command included english -->
-
 </body>
 </html>
